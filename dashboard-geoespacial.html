@@ -518,9 +518,11 @@
   var estado = {metrica:'sla', regiao:'todas', mes:6, rankModo:'regiao', sel:null};
 
   var mapa = L.map('mapa',{zoomControl:true,scrollWheelZoom:false,minZoom:3}).setView([-15.3,-52.5],4);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
-    attribution:'&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:18
+  var esri = 'https://server.arcgisonline.com/ArcGIS/rest/services/';
+  L.tileLayer(esri + 'Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',{
+    attribution:'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ', maxZoom:16
   }).addTo(mapa);
+  L.tileLayer(esri + 'Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}',{maxZoom:16}).addTo(mapa);
 
   var camada = L.layerGroup().addTo(mapa);
   var marcadores = {};
