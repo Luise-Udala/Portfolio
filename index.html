@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luise Udala | Analista de BI</title>
+<meta name="description" content="Todo número conta uma história. Portfólio de Luise Udala, analista de BI: dashboards, análise de dados, integração de sistemas e qualidade de dados.">
+<meta property="og:title" content="Luise Udala | Analista de BI">
+<meta property="og:description" content="O que os dados têm a dizer? Portfólio de BI e análise de dados.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FFF4E3">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#785D56;
+  --paper:#E6D5C1;
+  --white:#FFF4E3;
+  --card:#FFFAF2;
+  --text:#4A3631;
+  --muted:#6A4F49;
+  --line:#C6B299;
+  --accent:#BE4C54;
+  --accent-hover:#A93F47;
+  --on-accent:#FFFAF2;
+  --hot:#BE4C54;
+  --on-dark:#FFF4E3;
+  --on-dark-muted:#F0E1CC;
+  --data:#785D56;
+  --data-light:#E6D5C1;
+  --radius-lg:22px;
+  --radius-md:14px;
+  --radius-sm:8px;
+  --font:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:var(--font);color:var(--text);background:var(--paper);line-height:1.6;font-size:1.0625rem;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+ul{list-style:none}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--accent);color:var(--on-accent);padding:10px 16px;border-radius:var(--radius-sm);font-weight:600;z-index:100;text-decoration:none}
+.skip:focus{top:12px}
+.wrap{width:100%;max-width:1160px;margin-inline:auto;padding-inline:clamp(20px,5vw,48px)}
+
+/* tipografia */
+h1,h2,h3{font-weight:700;line-height:1.08;letter-spacing:-0.02em;text-wrap:balance}
+h1{font-size:clamp(2.6rem,6.4vw,5.2rem);font-weight:800;letter-spacing:-0.035em}
+h2{font-size:clamp(1.9rem,3.8vw,3rem)}
+h3{font-size:clamp(1.3rem,2.2vw,1.7rem);letter-spacing:-0.015em}
+.lead{font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.55;max-width:56ch}
+.section{padding-block:clamp(72px,10vw,128px)}
+.section-head{max-width:62ch;margin-bottom:clamp(36px,5vw,64px)}
+.section-head p{margin-top:16px;color:var(--muted)}
+.dark{--bg:var(--ink);--accent:#E6D5C1;--accent-hover:#F3E8DA;--on-accent:#4A3631;background:var(--bg);color:var(--on-dark)}
+.dark .section-head p{color:var(--on-dark-muted)}
+.paper{background:var(--white)}
+
+/* botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-family:inherit;font-weight:600;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:background-color .2s,border-color .2s,color .2s,transform .2s}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{background:var(--accent-hover)}
+.btn-ghost{border-color:rgba(255,244,227,.5);color:var(--on-dark)}
+.btn-ghost:hover{border-color:var(--on-dark);background:rgba(255,255,255,.06)}
+.btn-outline{border-color:var(--text);color:var(--text)}
+.btn-outline:hover{background:var(--text);color:var(--white)}
+.btn-sm{padding:9px 20px;font-size:.95rem}
+
+/* topo */
+.top{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(255,244,227,.86);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid rgba(74,54,49,.14)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem;letter-spacing:-0.01em;text-decoration:none;color:var(--text)}
+.top nav{display:flex;align-items:center;gap:clamp(14px,3vw,34px)}
+.top nav a:not(.btn){color:var(--muted);text-decoration:none;font-weight:500;font-size:.98rem;transition:color .2s}
+.top nav a:not(.btn):hover{color:var(--text)}
+
+/* hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:120px 0 72px;background-color:var(--white);color:var(--text);overflow:hidden;
+  background-image:linear-gradient(rgba(120,93,86,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(120,93,86,.09) 1px,transparent 1px);background-size:56px 56px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,5vw,72px);align-items:center}
+.hero-copy .lead{margin-top:26px;color:var(--muted)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.chart-wrap{position:relative}
+.chart{background:var(--card);border:1px solid var(--line);box-shadow:0 20px 50px rgba(74,54,49,.12);border-radius:var(--radius-lg);padding:20px 18px 14px}
+.chart svg{width:100%;height:auto;overflow:visible}
+.chart .grid-line{stroke:rgba(74,54,49,.14);stroke-width:1}
+.chart .axis-label{fill:var(--muted);font-size:11px;font-family:var(--font)}
+.chart .line{fill:none;stroke:var(--data);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.chart .area{fill:var(--data);opacity:0}
+.chart .guide{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:4 4;opacity:0;transition:opacity .2s}
+.chart .pt{cursor:pointer;opacity:0}
+.chart .pt .dot{fill:var(--card);stroke:var(--data);stroke-width:2.5;transition:r .15s,fill .15s,stroke .15s}
+.chart .pt .hit{fill:transparent}
+.chart .pt.is-on .dot{fill:var(--accent);stroke:var(--accent)}
+.chart.is-drawn .line{stroke-dashoffset:0;transition:stroke-dashoffset 1.8s cubic-bezier(.45,.05,.25,1)}
+.chart.is-drawn .area{opacity:.13;transition:opacity .9s 1.4s}
+.chart.is-drawn .pt{opacity:1;transition:opacity .4s}
+.chart.is-drawn .guide.on{opacity:1}
+.tip{position:absolute;top:-8px;left:50%;width:min(270px,64%);transform:translate(-50%,-100%);background:var(--ink);color:var(--on-dark);border-radius:var(--radius-md);padding:12px 16px;font-size:.92rem;line-height:1.4;box-shadow:0 14px 40px rgba(74,54,49,.3);pointer-events:none;opacity:0;transition:opacity .2s,left .2s}
+.tip.on{opacity:1}
+.tip strong{display:block;font-size:.98rem;margin-bottom:2px}
+.tip::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:var(--ink);transform:translateX(-50%) rotate(45deg)}
+.chart-note{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:.88rem;color:var(--muted)}
+
+/* números */
+.numbers{background:var(--paper)}
+.numbers-intro{max-width:50ch;color:var(--muted);margin-bottom:40px}
+.numbers-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--text)}
+.numbers-grid li{padding:28px 24px 8px 0}
+.numbers-grid li + li{padding-left:24px;border-left:1px solid var(--line)}
+.num{font-size:clamp(3rem,6vw,5rem);font-weight:800;letter-spacing:-0.04em;line-height:1;color:var(--text)}
+.num .suffix{color:var(--accent)}
+.numbers-grid p{margin-top:12px;color:var(--muted);font-size:.98rem;line-height:1.45;max-width:26ch}
+
+/* projetos */
+.proj-wrap{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:clamp(32px,5vw,72px);align-items:start}
+.proj{min-height:76vh;display:flex;flex-direction:column;justify-content:center;gap:18px;opacity:.32;transition:opacity .35s}
+.proj.is-active{opacity:1}
+.proj:last-child{min-height:64vh}
+.proj p{color:var(--muted);max-width:50ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags li{font-size:.88rem;font-weight:500;padding:5px 12px;border-radius:var(--radius-sm);background:var(--card);border:1px solid var(--line);color:var(--text)}
+.proj-actions{margin-top:6px}
+.stage{position:sticky;top:96px;height:min(620px,calc(100vh - 128px));align-self:start}
+.panel{position:absolute;inset:0;display:flex;align-items:center;opacity:0;pointer-events:none;transition:opacity .4s}
+.panel>*{width:100%}
+.panel.is-active{opacity:1;pointer-events:auto}
+.inline-visual{display:none}
+.mock,.embed-box{height:100%}
+.mock{--on-dark:#4A3631;--on-dark-muted:#6A4F49;--data-light:#785D56;--hot:#BE4C54;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:16px;overflow:hidden;box-shadow:0 24px 60px rgba(74,54,49,.25)}
+.mock-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.mock-title{font-weight:700;font-size:1.05rem}
+.badge{font-size:.78rem;font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(190,76,84,.12);color:var(--accent-hover);white-space:nowrap}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.kpi{background:rgba(120,93,86,.09);border-radius:var(--radius-md);padding:14px 16px}
+.kpi span{display:block;font-size:.82rem;color:var(--on-dark-muted)}
+.kpi b{font-size:1.7rem;font-weight:700;letter-spacing:-0.02em}
+.rows{display:flex;flex-direction:column;gap:12px}
+.mock > .rows{flex:1;justify-content:space-evenly}
+.row{display:grid;grid-template-columns:130px 1fr;gap:12px;align-items:center;font-size:.88rem;color:var(--on-dark-muted)}
+.bar{height:12px;border-radius:6px;background:rgba(120,93,86,.15);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:6px;background:var(--data-light)}
+.bar i.hot{background:var(--hot)}
+.fake-search{display:flex;align-items:center;gap:10px;background:rgba(120,93,86,.1);border-radius:var(--radius-md);padding:12px 16px;font-size:.92rem;color:var(--on-dark-muted)}
+.cols{flex:1;min-height:150px;display:grid;grid-template-columns:repeat(8,1fr);gap:10px;align-items:end;padding-top:8px}
+.col{display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.col i{display:block;width:100%;border-radius:6px 6px 2px 2px;background:var(--data-light)}
+.col i.hot{background:var(--hot)}
+.col small{font-size:.74rem;color:var(--on-dark-muted)}
+.col em{font-style:normal;font-size:.74rem;font-weight:600;color:var(--on-dark)}
+.geo{flex:1;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;min-height:0}
+.geo svg{width:100%;height:100%;background:rgba(120,93,86,.08);border-radius:var(--radius-md)}
+.rank{display:flex;flex-direction:column;gap:12px;justify-content:center}
+.rank .row{grid-template-columns:1fr;gap:6px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{font-family:inherit;font-size:.86rem;font-weight:600;padding:8px 14px;border-radius:999px;border:1.5px solid rgba(120,93,86,.4);background:transparent;color:var(--on-dark-muted);cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.tab:hover{color:var(--text);border-color:rgba(120,93,86,.8)}
+.tab[aria-selected="true"]{background:var(--data-light);border-color:var(--data-light);color:var(--card)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters span{font-size:.82rem;padding:6px 12px;border-radius:var(--radius-sm);background:rgba(120,93,86,.1);color:var(--on-dark-muted)}
+.tab-desc{font-size:1rem;color:var(--on-dark);min-height:3.2em}
+.embed.tall{height:100%;aspect-ratio:auto}
+.embed{width:100%;height:auto;aspect-ratio:16/9;border:0;border-radius:var(--radius-lg);background:var(--white);box-shadow:0 24px 60px rgba(74,54,49,.2)}
+
+/* ferramentas */
+.tools{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:clamp(32px,6vw,96px);align-items:start}
+.tools-copy .lead{margin-top:20px;color:var(--muted)}
+.toollist dl{border-top:2px solid var(--text)}
+.toollist .tl{display:grid;grid-template-columns:minmax(120px,.5fr) 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.toollist dt{font-weight:700}
+.toollist dd{color:var(--muted)}
+
+/* trajetória */
+.timeline{position:relative;max-width:820px}
+.timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:rgba(255,255,255,.16)}
+.job{position:relative;padding:0 0 44px 40px}
+.job:last-child{padding-bottom:0}
+.job::before{content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--data-light)}
+.job:first-child::before{background:var(--accent);border-color:var(--accent)}
+.job time{display:block;font-size:.92rem;color:var(--on-dark-muted);margin-bottom:4px}
+.job h3{font-size:1.35rem}
+.job .where{color:var(--on-dark-muted);font-weight:500;margin-top:2px}
+.job p{margin-top:10px;max-width:60ch}
+.edu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,5vw,64px);margin-top:clamp(48px,7vw,88px);padding-top:32px;border-top:1px solid rgba(255,255,255,.16);max-width:820px}
+.edu h3{font-size:1.1rem;margin-bottom:8px}
+.edu p{color:var(--on-dark-muted)}
+
+/* marcas */
+.brands li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line);transition:padding-left .25s,color .25s}
+.brands li:first-child{border-top:2px solid var(--text)}
+.brands li:hover{padding-left:12px}
+.brands .name{font-size:clamp(1.6rem,3.6vw,2.8rem);font-weight:700;letter-spacing:-0.025em;line-height:1.1}
+.brands .meta{color:var(--muted);text-align:right;font-size:.98rem}
+
+/* contato */
+.contact{text-align:left}
+.contact h2{font-size:clamp(2.3rem,6vw,4.6rem);font-weight:800;letter-spacing:-0.035em;max-width:16ch}
+.contact .lead{margin-top:22px;color:var(--on-dark-muted)}
+.contact-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+footer{background:var(--ink);color:var(--on-dark-muted);padding:28px 0 36px;border-top:1px solid rgba(255,255,255,.1);font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+.signature{display:block;width:150px;height:auto;margin-top:28px}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(24px,5vw,72px);align-items:center}
+.contact-mark{width:100%;max-width:400px;height:auto;justify-self:end}
+
+/* responsivo */
+@media (max-width:980px){
+  .hero-grid,.tools,.contact-grid{grid-template-columns:1fr}
+  .contact-mark{max-width:220px;justify-self:start}
+  .tip{position:static;transform:none;width:100%;min-height:5.4rem;margin-bottom:12px}
+  .tip::after{display:none}
+  .proj-wrap{display:block}
+  .stage{display:none}
+  .proj{min-height:0;opacity:1;padding-bottom:56px}
+  .proj:last-child{min-height:0;padding-bottom:0}
+  .inline-visual{display:block;height:480px;margin-top:8px}
+  .inline-visual.is-embed{height:auto}
+  .inline-visual.is-embed.is-tall{height:600px}
+  .numbers-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .numbers-grid li:nth-child(3){padding-left:0;border-left:0}
+  .numbers-grid li:nth-child(n+3){border-top:1px solid var(--line);margin-top:20px;padding-top:24px}
+}
+@media (max-width:640px){
+  .inline-visual.is-embed{height:auto !important}
+  .inline-visual.is-embed.is-tall{height:560px !important}
+  .top nav a:not(.btn){display:none}
+  .toollist .tl{grid-template-columns:1fr;gap:6px}
+  .edu{grid-template-columns:1fr}
+  .brands li{grid-template-columns:1fr;gap:4px}
+  .brands .meta{text-align:left}
+  .inline-visual{height:520px}
+  .row{grid-template-columns:100px 1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+  .chart .line{stroke-dashoffset:0}
+  .chart .area{opacity:.14}
+  .chart .pt{opacity:1}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#projetos">Pular para os projetos</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#topo"><img src="logo-marrom.png" alt="" width="40" height="37"><span>Luise Udala</span></a>
+    <nav aria-label="Principal">
+      <a href="#projetos">Projetos</a>
+      <a href="#ferramentas">Ferramentas</a>
+      <a href="#trajetoria">Trajetória</a>
+      <a class="btn btn-primary btn-sm" href="#contato">Fale comigo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="topo">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>O que os dados têm a dizer?</h1>
+        <p class="lead">Todo número conta uma história. Eu sou a Luise, analista de BI, e meu trabalho é escutar essas histórias com calma para transformá-las em clareza, direção e sentido para cada tipo de negócio.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projetos">Ver projetos</a>
+          <a class="btn btn-outline" href="#contato">Falar comigo</a>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <div class="tip" id="tip" role="status" aria-live="polite"></div>
+        <figure class="chart" id="chart" aria-label="Gráfico de linha interativo com dados fictícios. Cada ponto mostra uma pequena história.">
+          <svg id="chartSvg" viewBox="0 0 560 360" role="group" aria-label="Pontos do gráfico"></svg>
+          <figcaption class="chart-note">
+            <span>Passe o mouse nos pontos, ou use a tecla Tab.</span>
+            <span>Dados fictícios, só para ilustrar.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section numbers" aria-labelledby="numeros-titulo">
+    <div class="wrap">
+      <h2 id="numeros-titulo" class="numbers-intro" style="font-size:clamp(1.3rem,2.4vw,1.8rem);font-weight:600;letter-spacing:-0.01em;line-height:1.3">Alguns resultados do meu trabalho recente.</h2>
+      <ul class="numbers-grid">
+        <li><div class="num"><span data-count="34">34</span></div><p>pautas de dúvidas, ajustes e melhorias conduzidas com o fornecedor de uma plataforma de gestão de projetos e compras</p></li>
+        <li><div class="num"><span data-count="7">7</span></div><p>relatórios da API que passaram a funcionar em duas rodadas de testes</p></li>
+        <li><div class="num"><span data-count="15">15</span><span class="suffix">+</span></div><p>achados de qualidade de dados classificados por gravidade</p></li>
+        <li><div class="num"><span data-count="5">5</span></div><p>telas na dashboard interativa que idealizei, em HTML, CSS e JavaScript</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section paper" id="projetos" aria-labelledby="projetos-titulo">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="projetos-titulo">Projetos</h2>
+        <p>Quatro trabalhos que mostram como eu transformo dados em decisão. Os quatro projetos são interativos e usam dados fictícios.</p>
+      </div>
+      <div class="proj-wrap">
+        <div class="proj-list" id="projList"></div>
+        <div class="stage" id="stage" aria-hidden="false"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ferramentas" aria-labelledby="ferramentas-titulo">
+    <div class="wrap tools">
+      <div class="tools-copy">
+        <h2 id="ferramentas-titulo">Ferramentas e jeito de trabalhar</h2>
+        <p class="lead">Gosto de entender a operação de perto, identificar o gargalo e levar a solução até a implementação, com documentação para o time conseguir usar.</p>
+        <img class="signature" src="assinatura.png" alt="Assinatura de Luise" width="150" height="140">
+      </div>
+      <div class="toollist">
+        <dl>
+          <div class="tl"><dt>Análise e BI</dt><dd>SQL, Power BI, DAX, Power Query (M), Excel e Google Sheets avançados, análise exploratória, KPIs e performance</dd></div>
+          <div class="tl"><dt>Integração e automação</dt><dd>Python, JavaScript, Google Apps Script, API REST e JSON, Postman, ETL</dd></div>
+          <div class="tl"><dt>Medição digital</dt><dd>Google Analytics 4, Google Tag Manager (web e server-side), Google Ads, Meta Pixel e Conversion API</dd></div>
+          <div class="tl"><dt>Geoespacial e operação</dt><dd>Leaflet, geocodificação, controle de estoque, last mile, fechamento operacional</dd></div>
+          <div class="tl"><dt>Sistemas</dt><dd>SAP, HubSpot, AdTraffic</dd></div>
+          <div class="tl"><dt>Comunicação</dt><dd>Apresentação para liderança e diretoria, documentação técnica, treinamento de usuários</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="trajetoria" aria-labelledby="trajetoria-titulo">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="trajetoria-titulo">Trajetória</h2>
+      </div>
+      <ol class="timeline" style="list-style:none">
+        <li class="job">
+          <time>Junho de 2026 até hoje</time>
+          <h3>Analista de Dados</h3>
+          <div class="where">Freelance</div>
+          <p>Operação de campo do iFood até setembro de 2026 e, desde então, na área de inteligência de dados: gestão de uma plataforma de projetos e compras, dashboards e análise de qualidade de dados.</p>
+        </li>
+        <li class="job">
+          <time>Fevereiro a maio de 2026</time>
+          <h3>Analista de Web Analytics e Tracking</h3>
+          <div class="where">CDR+: Ideias e Soluções, freelance</div>
+          <p>Tracking do site criado do zero com Google Tag Manager (web e server-side), GA4 e Meta Pixel com Conversion API, e Google Ads ligado aos eventos de conversão.</p>
+        </li>
+        <li class="job">
+          <time>Julho a novembro de 2025</time>
+          <h3>Analista de Business Intelligence Pleno</h3>
+          <div class="where">Educa</div>
+          <p>Montei o primeiro ambiente de BI da empresa, trocando planilhas por dashboards executivos no Power BI, usados em reuniões com a liderança e o CEO.</p>
+        </li>
+        <li class="job">
+          <time>Setembro de 2024 a julho de 2025</time>
+          <h3>Analista de Business Intelligence Júnior</h3>
+          <div class="where">Batux</div>
+          <p>Dashboards e relatórios de performance para campanhas nacionais. Fui promovida de estagiária a analista júnior ao assumir responsabilidades técnicas.</p>
+        </li>
+        <li class="job">
+          <time>Agosto de 2022 a setembro de 2023</time>
+          <h3>Estagiária em Crédito e Cobrança</h3>
+          <div class="where">Syngenta Proteção de Cultivos</div>
+          <p>Relatórios financeiros em SAP e dashboards de limites de crédito no Power BI.</p>
+        </li>
+      </ol>
+      <div class="edu">
+        <div>
+          <h3>Formação</h3>
+          <p>Bacharelado em Sistemas de Informação, Uninove, 2022 a 2026.</p>
+        </div>
+        <div>
+          <h3>Idiomas</h3>
+          <p>Português nativo, inglês avançado e alemão básico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section paper" aria-labelledby="marcas-titulo">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="marcas-titulo">Marcas que fizeram parte da minha jornada</h2>
+      </div>
+      <ul class="brands">
+        <li><span class="name">Brasil Cacau</span><span class="meta">15 Anos, 2024</span></li>
+        <li><span class="name">Brastemp</span><span class="meta">2024 a 2025</span></li>
+        <li><span class="name">Consul</span><span class="meta">2024 a 2025</span></li>
+        <li><span class="name">Betânia Kids</span><span class="meta">Hora da Merenda, 2025</span></li>
+        <li><span class="name">Cooxupé</span><span class="meta">Café Evolutto, Prêmio em Família, 2025</span></li>
+        <li><span class="name">Shopee</span><span class="meta">2025</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section dark contact" id="contato" aria-labelledby="contato-titulo">
+    <div class="wrap contact-grid">
+      <div class="contact-copy">
+      <h2 id="contato-titulo">Vamos conversar sobre os seus dados?</h2>
+      <p class="lead">Se você tem uma pergunta de negócio, uma planilha cheia de controles ou um dashboard que ninguém entende, me chama.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:luise_u.silva@hotmail.com">Enviar e-mail</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/luiseudala/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/luiseudala/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      </div>
+      <img class="contact-mark" src="logo-creme.png" alt="Desenho de uma spitz alemã com uma flor de baunilha" width="400" height="366">
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Luise Udala, São Paulo</span>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   CONFIGURAÇÃO DOS PROJETOS
+   Para mostrar o dashboard de verdade no lugar da prévia ilustrativa,
+   cole o link de incorporação (embed) no campo "url" do projeto.
+   Exemplo (Looker Studio): https://lookerstudio.google.com/embed/reporting/ID/page/PAGINA
+   Deixando "url" vazio, a página mostra a prévia ilustrativa.
+   ============================================================ */
+const PROJECTS = [
+  {
+    id: "educacao",
+    title: "Monitoramento em programas socioemocionais",
+    text: "Dashboard para acompanhar adesão, engajamento e satisfação dos alunos em diferentes programas de desenvolvimento emocional. Reúne frequência média, taxa de alunos ativos, participação familiar e avaliação por tipo de programa, para apoiar as decisões da equipe escolar.",
+    tags: ["Educação", "Power BI", "Dados fictícios"],
+    url: "https://app.powerbi.com/view?r=eyJrIjoiNmExYjYyMjItY2ZlMy00ZTMzLTkxODUtODdkYWU1NjFiNjk0IiwidCI6IjUxZTJmMDUzLWJiMmUtNGJkNi05ZWJmLTdmMjdjOTRjMWZkZCJ9"
+  },
+  {
+    id: "financeiro",
+    title: "Pagamentos semanais de entregadores",
+    text: "Visão dos pagamentos por semana, com a variação entre semanas e busca pelo código do funcionário, não pelo nome. O escopo é enxuto de propósito: só o que o pedido original precisava, com leitura visual limpa.",
+    tags: ["Financeiro", "Power BI", "Dados fictícios"],
+    url: "https://app.powerbi.com/view?r=eyJrIjoiMDFhMGM4ZDUtZDA5YS00ZDFlLWJmY2QtMmYyNThkMzUzZDUyIiwidCI6IjUxZTJmMDUzLWJiMmUtNGJkNi05ZWJmLTdmMjdjOTRjMWZkZCJ9"
+  },
+  {
+    id: "geo",
+    title: "Dashboard geoespacial de performance por região",
+    text: "Dashboard em Leaflet para analisar a performance de entregas por região: mapa por praça, ranking, filtros por métrica, região e mês, e uma tabela de divergências entre dois sistemas de registro, com a regra de conciliação explicada na tela. O trabalho real envolveu dezenas de milhares de registros de entrega, com metodologia própria para tratar divergências entre fontes. Esta demonstração usa números gerados.",
+    tags: ["Leaflet", "Geocodificação", "Ranking por área", "Dados fictícios"],
+    tall: true,
+    url: "dashboard-geoespacial.html"
+  },
+  {
+    id: "painel",
+    title: "Painel de operações de agência",
+    text: "Painel interativo que reúne, numa única tela, o que quem coordena uma agência precisa acompanhar: andamento dos projetos, alocação de horas da equipe e fluxo de compras e faturamento. Tem quatro telas (visão geral, projetos, timesheet e financeiro), filtros por período, mês e colaborador, busca e um ícone de explicação em cada indicador. Feito em HTML, CSS e JavaScript puros, com os gráficos desenhados em SVG.",
+    tags: ["HTML", "CSS", "JavaScript", "SVG", "Dados fictícios"],
+    tall: true,
+    url: "painel-operacoes.html"
+  }
+];
+
+const TABS = [
+  ["Visão geral", "Resumo dos indicadores principais, com filtros por período, colaborador e mês."],
+  ["Projetos", "Acompanhamento dos projetos e do orçamento de cada um."],
+  ["Timesheet", "Horas registradas por colaborador e por período."],
+  ["Financeiro", "Visão financeira dos projetos: orçamento, adiantamentos e compras."],
+  ["Qualidade dos dados", "Lacunas e inconsistências encontradas nos dados, classificadas por gravidade."]
+];
+
+/* ---------- prévias ilustrativas ---------- */
+function geoDots(){
+  let s = 7, out = "";
+  const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const clusters = [[95,95,52],[215,150,44],[110,235,60],[222,310,42],[90,375,46]];
+  clusters.forEach(([cx,cy,r]) => {
+    for (let i = 0; i < 58; i++){
+      const a = rnd() * Math.PI * 2, d = Math.sqrt(rnd()) * r;
+      const x = (cx + Math.cos(a) * d).toFixed(1), y = (cy + Math.sin(a) * d).toFixed(1);
+      out += `<circle cx="${x}" cy="${y}" r="${(2.2 + rnd()*2.2).toFixed(1)}" fill="${rnd() > .82 ? "#BE4C54" : "#785D56"}" opacity="${(.45 + rnd()*.5).toFixed(2)}"/>`;
+    }
+  });
+  return out;
+}
+
+function mock(id){
+  if (id === "educacao") return `
+    <div class="mock">
+      <div class="mock-head"><span class="mock-title">Programas socioemocionais</span><span class="badge">Prévia ilustrativa, dados fictícios</span></div>
+      <div class="kpis">
+        <div class="kpi"><span>Frequência média</span><b>87%</b></div>
+        <div class="kpi"><span>Alunos ativos</span><b>92%</b></div>
+        <div class="kpi"><span>Participação familiar</span><b>64%</b></div>
+        <div class="kpi"><span>Satisfação</span><b>4,6</b></div>
+      </div>
+      <div class="rows" aria-label="Avaliação por tipo de programa">
+        <div class="row"><span>Programa A</span><div class="bar"><i style="width:88%"></i></div></div>
+        <div class="row"><span>Programa B</span><div class="bar"><i class="hot" style="width:94%"></i></div></div>
+        <div class="row"><span>Programa C</span><div class="bar"><i style="width:71%"></i></div></div>
+        <div class="row"><span>Programa D</span><div class="bar"><i style="width:79%"></i></div></div>
+      </div>
+    </div>`;
+  if (id === "financeiro"){
+    const weeks = [[48,"+3,1%"],[52,"+8,3%"],[47,"−9,6%"],[58,"+23%"],[61,"+5,2%"],[55,"−9,8%"],[66,"+20%"],[70,"+6,1%"]];
+    return `
+    <div class="mock">
+      <div class="mock-head"><span class="mock-title">Pagamentos semanais</span><span class="badge">Prévia ilustrativa, dados fictícios</span></div>
+      <div class="fake-search" aria-hidden="true">Buscar por código do funcionário</div>
+      <div class="cols" aria-label="Pagamentos por semana e variação semanal">
+        ${weeks.map((w,i) => `<div class="col"><em>${w[1]}</em><i class="${i === 3 ? "hot" : ""}" style="height:${w[0]}%"></i><small>S${i+1}</small></div>`).join("")}
+      </div>
+    </div>`;
+  }
+  if (id === "geo") return `
+    <div class="mock">
+      <div class="mock-head"><span class="mock-title">Performance por região</span><span class="badge">Prévia ilustrativa, sem dados reais</span></div>
+      <div class="geo">
+        <svg viewBox="0 0 300 440" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mapa de pontos ilustrativo">${geoDots()}</svg>
+        <div class="rank" aria-label="Ranking por área">
+          <div class="row"><span>Área 1</span><div class="bar"><i class="hot" style="width:96%"></i></div></div>
+          <div class="row"><span>Área 2</span><div class="bar"><i style="width:78%"></i></div></div>
+          <div class="row"><span>Área 3</span><div class="bar"><i style="width:61%"></i></div></div>
+          <div class="row"><span>Área 4</span><div class="bar"><i style="width:44%"></i></div></div>
+          <div class="row"><span>Área 5</span><div class="bar"><i style="width:30%"></i></div></div>
+        </div>
+      </div>
+    </div>`;
+  return `
+    <div class="mock" data-tabs>
+      <div class="mock-head"><span class="mock-title">Painel de operações</span><span class="badge">Prévia ilustrativa, sem dados reais</span></div>
+      <div class="tabs" role="tablist" aria-label="Telas da dashboard">
+        ${TABS.map((t,i) => `<button class="tab" role="tab" aria-selected="${i === 0}" data-tab="${i}">${t[0]}</button>`).join("")}
+      </div>
+      <div class="filters" aria-hidden="true"><span>Período</span><span>Colaborador</span><span>Mês</span></div>
+      <p class="tab-desc" role="status" aria-live="polite">${TABS[0][1]}</p>
+      <div class="rows" aria-hidden="true">
+        <div class="row"><span>Indicador 1</span><div class="bar"><i style="width:82%"></i></div></div>
+        <div class="row"><span>Indicador 2</span><div class="bar"><i class="hot" style="width:67%"></i></div></div>
+        <div class="row"><span>Indicador 3</span><div class="bar"><i style="width:49%"></i></div></div>
+        <div class="row"><span>Indicador 4</span><div class="bar"><i style="width:35%"></i></div></div>
+      </div>
+    </div>`;
+}
+
+function visual(p){
+  if (p.url) return `<iframe class="embed${p.tall ? " tall" : ""}" src="${p.url}" title="${p.title}" loading="lazy" allowfullscreen></iframe>`;
+  return mock(p.id);
+}
+
+/* ---------- monta a seção de projetos ---------- */
+const list = document.getElementById("projList");
+const stage = document.getElementById("stage");
+PROJECTS.forEach((p, i) => {
+  const art = document.createElement("article");
+  art.className = "proj" + (i === 0 ? " is-active" : "");
+  art.dataset.index = i;
+  art.innerHTML = `
+    <h3>${p.title}</h3>
+    <p>${p.text}</p>
+    <ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join("")}</ul>
+    ${p.url ? `<div class="proj-actions"><a class="btn btn-outline btn-sm" href="${p.url}" target="_blank" rel="noopener">Abrir em tela cheia</a></div>` : ""}
+    <div class="inline-visual">${visual(p)}</div>`;
+  if (p.url) art.querySelector(".inline-visual").classList.add("is-embed", ...(p.tall ? ["is-tall"] : []));
+  list.appendChild(art);
+
+  const panel = document.createElement("div");
+  panel.className = "panel" + (i === 0 ? " is-active" : "");
+  panel.dataset.index = i;
+  panel.innerHTML = visual(p);
+  stage.appendChild(panel);
+});
+
+const items = [...list.querySelectorAll(".proj")];
+const panels = [...stage.querySelectorAll(".panel")];
+function setActive(i){
+  items.forEach((el, k) => el.classList.toggle("is-active", k === i));
+  panels.forEach((el, k) => el.classList.toggle("is-active", k === i));
+}
+if ("IntersectionObserver" in window){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) setActive(Number(e.target.dataset.index)); });
+  }, { rootMargin: "-45% 0px -45% 0px" });
+  items.forEach(el => io.observe(el));
+}
+
+/* abas da prévia do painel */
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".tab");
+  if (!btn) return;
+  const box = btn.closest("[data-tabs]");
+  box.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", String(b === btn)));
+  box.querySelector(".tab-desc").textContent = TABS[Number(btn.dataset.tab)][1];
+});
+
+/* ---------- gráfico do topo ---------- */
+(function(){
+  const svg = document.getElementById("chartSvg");
+  const chart = document.getElementById("chart");
+  const tip = document.getElementById("tip");
+  const W = 560, H = 360, P = { l: 44, r: 18, t: 20, b: 42 };
+  const data = [32,38,35,44,41,58,52,61,57,69,66,78];
+  const stories = [
+    "Ponto de partida: antes de medir, tudo parecia “mais ou menos”.",
+    "Primeiro painel no ar. Surgem as primeiras perguntas.",
+    "A queda foi um campo sem preenchimento, não o negócio.",
+    "Duas fontes, dois números. Hora de alinhar a definição.",
+    "Um indicador, uma definição. Menos reunião sobre qual número está certo.",
+    "O salto veio da campanha, e agora dá para provar.",
+    "Oscilação normal da semana. Nem todo ruído é insight.",
+    "O filtro por região mostra onde está o ganho de verdade.",
+    "Pequena queda: o time ajustou a rota a tempo.",
+    "Dado limpo, decisão rápida.",
+    "Meta batida. A pergunta agora é por quê.",
+    "O número é o fim da análise e o começo da decisão."
+  ];
+  const max = 90;
+  const x = i => P.l + i * (W - P.l - P.r) / (data.length - 1);
+  const y = v => P.t + (1 - v / max) * (H - P.t - P.b);
+  let html = "";
+  [0,30,60,90].forEach(v => {
+    html += `<line class="grid-line" x1="${P.l}" x2="${W - P.r}" y1="${y(v)}" y2="${y(v)}"/><text class="axis-label" x="${P.l - 10}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
+  });
+  [0,3,6,9,11].forEach(i => {
+    html += `<text class="axis-label" x="${x(i)}" y="${H - 14}" text-anchor="middle">Sem ${i + 1}</text>`;
+  });
+  const pts = data.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`);
+  const area = `M${x(0)},${y(0)} L${pts.join(" L")} L${x(data.length - 1)},${y(0)} Z`;
+  html += `<path class="area" d="${area}"/>`;
+  html += `<line class="guide" id="guide" x1="0" x2="0" y1="${P.t}" y2="${y(0)}"/>`;
+  html += `<polyline class="line" pathLength="1" points="${pts.join(" ")}"/>`;
+  data.forEach((v, i) => {
+    html += `<g class="pt" data-i="${i}" tabindex="0" role="button" aria-label="Semana ${i + 1}, índice ${v}. ${stories[i]}">
+      <circle class="hit" cx="${x(i)}" cy="${y(v)}" r="18"/><circle class="dot" cx="${x(i)}" cy="${y(v)}" r="5.5"/></g>`;
+  });
+  svg.innerHTML = html;
+
+  const guide = svg.querySelector("#guide");
+  const dots = [...svg.querySelectorAll(".pt")];
+  function show(i){
+    dots.forEach((d, k) => d.classList.toggle("is-on", k === i));
+    guide.setAttribute("x1", x(i)); guide.setAttribute("x2", x(i)); guide.classList.add("on");
+    const pct = Math.min(80, Math.max(20, x(i) / W * 100));
+    tip.style.left = pct + "%";
+    tip.innerHTML = `<strong>Semana ${i + 1}, índice ${data[i]}</strong>${stories[i]}`;
+    tip.classList.add("on");
+  }
+  dots.forEach((d, i) => {
+    d.addEventListener("mouseenter", () => show(i));
+    d.addEventListener("focus", () => show(i));
+    d.addEventListener("click", () => show(i));
+  });
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  requestAnimationFrame(() => {
+    chart.classList.add("is-drawn");
+    setTimeout(() => show(5), reduce ? 0 : 2000);
+  });
+})();
+
+/* ---------- números que contam uma vez ---------- */
+(function(){
+  const els = [...document.querySelectorAll("[data-count]")];
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      const end = Number(e.target.dataset.count), t0 = performance.now(), dur = 1300;
+      const tick = now => {
+        const k = Math.min(1, (now - t0) / dur), eased = 1 - Math.pow(1 - k, 3);
+        e.target.textContent = Math.round(end * eased);
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      e.target.textContent = "0";
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: .6 });
+  els.forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
