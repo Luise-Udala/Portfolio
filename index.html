@@ -116,19 +116,27 @@ h3{font-size:clamp(1.3rem,2.2vw,1.7rem);letter-spacing:-0.015em}
 .numbers-grid p{margin-top:12px;color:var(--muted);font-size:.98rem;line-height:1.45;max-width:26ch}
 
 /* projetos */
-.proj-wrap{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:clamp(32px,5vw,72px);align-items:start}
-.proj{min-height:76vh;display:flex;flex-direction:column;justify-content:center;gap:18px;opacity:.32;transition:opacity .35s}
-.proj.is-active{opacity:1}
-.proj:last-child{min-height:64vh}
-.proj p{color:var(--muted);max-width:50ch}
+.proj-list{display:flex;flex-direction:column}
+.proj{padding-block:clamp(40px,6vw,72px);border-top:1px solid var(--line)}
+.proj:first-child{border-top:0;padding-top:0}
+.proj:last-child{padding-bottom:0}
+.proj-info{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,4vw,64px);align-items:end;margin-bottom:28px}
+.proj-info p{color:var(--muted);max-width:62ch;margin-top:14px}
+.proj-year{display:block;font-weight:700;font-size:1rem;color:var(--muted);margin-bottom:6px}
+.proj-side{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+.frame{position:relative;border-radius:var(--radius-lg);overflow:hidden;background:var(--card);border:1px solid var(--line);box-shadow:0 24px 60px rgba(74,54,49,.2)}
+.frame.is-wide{aspect-ratio:16/9}
+.frame.is-tall{height:min(780px,88vh)}
+.frame.is-mock{height:560px}
+.frame.is-short{height:min(560px,80vh)}
+.frame iframe,.frame .embed{display:block;width:100%;height:100%;border:0;border-radius:0;box-shadow:none;aspect-ratio:auto;background:var(--card)}
+.frame-lock{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:center;padding:0 0 20px;background:transparent;border:0;cursor:pointer;font-family:inherit}
+.frame-lock span{background:rgba(74,54,49,.88);color:var(--on-dark);font-weight:600;font-size:.95rem;padding:10px 20px;border-radius:999px;transition:background-color .2s}
+.frame-lock:hover span,.frame-lock:focus-visible span{background:var(--accent)}
+.frame.is-active .frame-lock{display:none}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tags li{font-size:.88rem;font-weight:500;padding:5px 12px;border-radius:var(--radius-sm);background:var(--card);border:1px solid var(--line);color:var(--text)}
-.proj-actions{margin-top:6px}
-.stage{position:sticky;top:96px;height:min(620px,calc(100vh - 128px));align-self:start}
-.panel{position:absolute;inset:0;display:flex;align-items:center;opacity:0;pointer-events:none;transition:opacity .4s}
-.panel>*{width:100%}
-.panel.is-active{opacity:1;pointer-events:auto}
-.inline-visual{display:none}
+.proj-actions{margin-top:0}
 .mock,.embed-box{height:100%}
 .mock{--on-dark:#4A3631;--on-dark-muted:#6A4F49;--data-light:#785D56;--hot:#BE4C54;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:16px;overflow:hidden;box-shadow:0 24px 60px rgba(74,54,49,.25)}
 .mock-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -207,32 +215,64 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .contact-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(24px,5vw,72px);align-items:center}
 .contact-mark{width:100%;max-width:400px;height:auto;justify-self:end}
 
+.about-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:clamp(32px,6vw,96px);align-items:start}
+.about-text p{font-size:clamp(1.05rem,1.4vw,1.2rem);line-height:1.65}
+.about-text p + p{margin-top:1.1em}
+
+#sobre .section-head p{font-size:clamp(1.1rem,1.7vw,1.35rem);margin-top:14px}
+/* cartões de perguntas */
+.qgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,24px)}
+.qcard{position:relative;aspect-ratio:1/1;perspective:1200px;cursor:pointer;border-radius:var(--radius-lg)}
+.qface{position:absolute;inset:0;display:flex;flex-direction:column;border-radius:var(--radius-lg);overflow:hidden;padding:clamp(18px,2.2vw,28px);
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .65s cubic-bezier(.2,.7,.2,1);border:1px solid rgba(74,54,49,.14)}
+.qfront{background:var(--tom);color:var(--texto);transform:rotateY(0deg)}
+.qback{background:var(--tom2);color:var(--texto2);transform:rotateY(180deg);justify-content:center}
+.qimg{position:absolute;inset:0;z-index:0;opacity:var(--op,.55);mix-blend-mode:luminosity;
+  background:var(--img, radial-gradient(circle at 86% 14%, rgba(255,244,227,.85) 0 20%, transparent 21%), radial-gradient(circle at 8% 96%, rgba(74,54,49,.45) 0 34%, transparent 35%));
+  background-size:cover;background-position:center}
+.qfront::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,var(--tom) 0%,color-mix(in srgb,var(--tom) 55%,transparent) 32%,color-mix(in srgb,var(--tom) 0%,transparent) 66%)}
+.qfront h3{position:relative;z-index:1;font-size:clamp(1.25rem,2.1vw,1.75rem);line-height:1.12;letter-spacing:-0.02em;font-weight:700;text-wrap:balance}
+.qdica{position:relative;z-index:1;margin-top:auto;align-self:flex-start;font-size:.82rem;font-weight:600;padding:5px 12px;border-radius:999px;border:1.5px solid currentColor;opacity:.85}
+.so-toque{display:none}
+.qback p{margin:0;max-width:none;font-size:clamp(.98rem,1.3vw,1.12rem);line-height:1.5;font-weight:500}
+.qcard:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.qcard:focus-visible .qfront,.qcard.is-flipped .qfront{transform:rotateY(-180deg)}
+.qcard:focus-visible .qback,.qcard.is-flipped .qback{transform:rotateY(0deg)}
+@media (hover:hover){
+  .qcard:hover .qfront{transform:rotateY(-180deg)}
+  .qcard:hover .qback{transform:rotateY(0deg)}
+}
+@media (hover:none){
+  .so-mouse{display:none}
+  .so-toque{display:inline}
+}
+
 /* responsivo */
 @media (max-width:980px){
-  .hero-grid,.tools,.contact-grid{grid-template-columns:1fr}
+  .hero-grid,.tools,.contact-grid,.about-grid{grid-template-columns:1fr}
   .contact-mark{max-width:220px;justify-self:start}
   .tip{position:static;transform:none;width:100%;min-height:5.4rem;margin-bottom:12px}
   .tip::after{display:none}
-  .proj-wrap{display:block}
-  .stage{display:none}
-  .proj{min-height:0;opacity:1;padding-bottom:56px}
-  .proj:last-child{min-height:0;padding-bottom:0}
-  .inline-visual{display:block;height:480px;margin-top:8px}
-  .inline-visual.is-embed{height:auto}
-  .inline-visual.is-embed.is-tall{height:600px}
+  .proj-info{grid-template-columns:1fr;align-items:start;margin-bottom:22px}
   .numbers-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .numbers-grid li:nth-child(3){padding-left:0;border-left:0}
   .numbers-grid li:nth-child(n+3){border-top:1px solid var(--line);margin-top:20px;padding-top:24px}
 }
+@media (max-width:999px){
+  .qgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:639px){
+  .qgrid{grid-template-columns:1fr}
+}
 @media (max-width:640px){
-  .inline-visual.is-embed{height:auto !important}
-  .inline-visual.is-embed.is-tall{height:560px !important}
+  .frame.is-wide{aspect-ratio:4/3}
+  .frame.is-tall{height:560px}
+  .frame.is-short{height:480px}
   .top nav a:not(.btn){display:none}
   .toollist .tl{grid-template-columns:1fr;gap:6px}
   .edu{grid-template-columns:1fr}
   .brands li{grid-template-columns:1fr;gap:4px}
   .brands .meta{text-align:left}
-  .inline-visual{height:520px}
   .row{grid-template-columns:100px 1fr}
 }
 @media (prefers-reduced-motion:reduce){
@@ -295,16 +335,82 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     </div>
   </section>
 
-  <section class="section paper" id="projetos" aria-labelledby="projetos-titulo">
+  <section class="section paper about" id="sobre" aria-labelledby="sobre-titulo">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="sobre-titulo">Dashboard também pode ter personalidade</h2>
+        <p><span id="qtdPerguntas">Seis</span> perguntas para conhecer o meu trabalho.</p>
+      </div>
+      <div class="qgrid">
+        <article class="qcard" tabindex="0" style="--tom:#785D56;--texto:#FFF4E3;--tom2:#FFF4E3;--texto2:#4A3631;--img:url(quad-1.jpg);--op:0.52">
+          <div class="qface qfront">
+            <div class="qimg"></div>
+            <h3>Chegou um pedido de dashboard. E agora?</h3>
+            <span class="qdica"><span class="so-mouse">passe o mouse</span><span class="so-toque">toque para virar</span></span>
+          </div>
+          <div class="qface qback"><p>Antes do primeiro gráfico, entendo o objetivo: qual decisão o dashboard vai apoiar e quem vai usá-lo. Depois levanto os indicadores e os dados disponíveis, alinho com quem pediu e só então começo a construir.</p></div>
+        </article>
+        <article class="qcard" tabindex="0" style="--tom:#C6B299;--texto:#4A3631;--tom2:#785D56;--texto2:#FFF4E3;--img:url(quad-2.jpg);--op:0.48">
+          <div class="qface qfront">
+            <div class="qimg"></div>
+            <h3>Como saber se o número está certo?</h3>
+            <span class="qdica"><span class="so-mouse">passe o mouse</span><span class="so-toque">toque para virar</span></span>
+          </div>
+          <div class="qface qback"><p>Do jeito chato e necessário: comparo com a origem, linha por linha. Gráfico lindo com número errado só erra com mais estilo, e isso eu não deixo passar.</p></div>
+        </article>
+        <article class="qcard" tabindex="0" style="--tom:#BE4C54;--texto:#FFFAF2;--tom2:#E6D5C1;--texto2:#4A3631;--img:url(quad-3.jpg);--op:0.36">
+          <div class="qface qfront">
+            <div class="qimg"></div>
+            <h3>E quando o dado simplesmente não bate?</h3>
+            <span class="qdica"><span class="so-mouse">passe o mouse</span><span class="so-toque">toque para virar</span></span>
+          </div>
+          <div class="qface qback"><p>Registro o erro com evidência, aviso quem pode corrigir e acompanho até resolver. Sem drama: print, paciência e tudo documentado.</p></div>
+        </article>
+        <article class="qcard" tabindex="0" style="--tom:#E6D5C1;--texto:#4A3631;--tom2:#BE4C54;--texto2:#FFFAF2;--img:url(quad-4.jpg);--op:0.46">
+          <div class="qface qfront">
+            <div class="qimg"></div>
+            <h3>Por que dashboard precisa de personalidade?</h3>
+            <span class="qdica"><span class="so-mouse">passe o mouse</span><span class="so-toque">toque para virar</span></span>
+          </div>
+          <div class="qface qback"><p>Número certo é a base, sempre. Mas um dashboard bonito, com cor, ritmo e boa organização, convida a pessoa a abrir, entender mais rápido e decidir com mais segurança.</p></div>
+        </article>
+        <article class="qcard" tabindex="0" style="--tom:#4A3631;--texto:#FFF4E3;--tom2:#C6B299;--texto2:#4A3631;--img:url(quad-5.jpg);--op:0.52">
+          <div class="qface qfront">
+            <div class="qimg"></div>
+            <h3>Power BI, HTML, CSS, JavaScript… por que tudo isso?</h3>
+            <span class="qdica"><span class="so-mouse">passe o mouse</span><span class="so-toque">toque para virar</span></span>
+          </div>
+          <div class="qface qback"><p>Comecei no Power BI, que me ensinou a pensar em dados. Depois bateu a curiosidade: e se eu desenhasse a visualização do jeito que a história pede? Hoje uso os dois, e nenhum ficou com ciúmes.</p></div>
+        </article>
+        <article class="qcard" tabindex="0" style="--tom:#FFFAF2;--texto:#4A3631;--tom2:#785D56;--texto2:#FFF4E3;--img:url(quad-6.jpg);--op:0.4">
+          <div class="qface qfront">
+            <div class="qimg"></div>
+            <h3>E a inteligência artificial, entra onde?</h3>
+            <span class="qdica"><span class="so-mouse">passe o mouse</span><span class="so-toque">toque para virar</span></span>
+          </div>
+          <div class="qface qback"><p>Primeiro, a base: treinei programação em projetinhos, como o CRUD de 2024 aqui do site, por pura curiosidade. Zero IA, só estudo e foco. Hoje, Claude, ChatGPT, Gemini e Cursor me ajudam a acelerar nossos projetos, mas análises, ideias e operação são minhas.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projetos" aria-labelledby="projetos-titulo">
     <div class="wrap">
       <div class="section-head">
         <h2 id="projetos-titulo">Projetos</h2>
-        <p>Quatro trabalhos que mostram como eu transformo dados em decisão. Os quatro projetos são interativos e usam dados fictícios.</p>
+        <p>Quatro trabalhos que mostram como eu transformo dados em decisão, do mais novo para o mais antigo. Os quatro projetos são interativos e usam dados fictícios. Clique em um painel para interagir com ele.</p>
       </div>
-      <div class="proj-wrap">
-        <div class="proj-list" id="projList"></div>
-        <div class="stage" id="stage" aria-hidden="false"></div>
+      <div class="proj-list" id="projList"></div>
+    </div>
+  </section>
+
+  <section class="section paper" id="sites" aria-labelledby="sites-titulo">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="sites-titulo">Sites que eu construo</h2>
+        <p>Além dos dashboards, também desenvolvo sites, do mais novo para o mais antigo. Clique em um painel para interagir com ele.</p>
       </div>
+      <div class="proj-list" id="sitesList"></div>
     </div>
   </section>
 
@@ -318,10 +424,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="toollist">
         <dl>
           <div class="tl"><dt>Análise e BI</dt><dd>SQL, Power BI, DAX, Power Query (M), Excel e Google Sheets avançados, análise exploratória, KPIs e performance</dd></div>
+          <div class="tl"><dt>Visualização na web</dt><dd>HTML, CSS, JavaScript, gráficos desenhados em SVG</dd></div>
           <div class="tl"><dt>Integração e automação</dt><dd>Python, JavaScript, Google Apps Script, API REST e JSON, Postman, ETL</dd></div>
           <div class="tl"><dt>Medição digital</dt><dd>Google Analytics 4, Google Tag Manager (web e server-side), Google Ads, Meta Pixel e Conversion API</dd></div>
           <div class="tl"><dt>Geoespacial e operação</dt><dd>Leaflet, geocodificação, controle de estoque, last mile, fechamento operacional</dd></div>
           <div class="tl"><dt>Sistemas</dt><dd>SAP, HubSpot, AdTraffic</dd></div>
+          <div class="tl"><dt>Inteligência artificial</dt><dd>Claude, ChatGPT, Gemini, Cursor</dd></div>
           <div class="tl"><dt>Comunicação</dt><dd>Apresentação para liderança e diretoria, documentação técnica, treinamento de usuários</dd></div>
         </dl>
       </div>
@@ -350,7 +458,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           <time>Julho a novembro de 2025</time>
           <h3>Analista de Business Intelligence Pleno</h3>
           <div class="where">Educa</div>
-          <p>Montei o primeiro ambiente de BI da empresa, trocando planilhas por dashboards executivos no Power BI, usados em reuniões com a liderança e o CEO.</p>
+          <p>Montei o primeiro ambiente de BI da empresa, trocando planilhas por dashboards executivos no Power BI, usados em reuniões com a liderança.</p>
         </li>
         <li class="job">
           <time>Setembro de 2024 a julho de 2025</time>
@@ -427,21 +535,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
    ============================================================ */
 const PROJECTS = [
   {
-    id: "educacao",
-    title: "Monitoramento em programas socioemocionais",
-    text: "Dashboard para acompanhar adesão, engajamento e satisfação dos alunos em diferentes programas de desenvolvimento emocional. Reúne frequência média, taxa de alunos ativos, participação familiar e avaliação por tipo de programa, para apoiar as decisões da equipe escolar.",
-    tags: ["Educação", "Power BI", "Dados fictícios"],
-    url: "https://app.powerbi.com/view?r=eyJrIjoiNmExYjYyMjItY2ZlMy00ZTMzLTkxODUtODdkYWU1NjFiNjk0IiwidCI6IjUxZTJmMDUzLWJiMmUtNGJkNi05ZWJmLTdmMjdjOTRjMWZkZCJ9"
-  },
-  {
-    id: "financeiro",
-    title: "Pagamentos semanais de entregadores",
-    text: "Visão dos pagamentos por semana, com a variação entre semanas e busca pelo código do funcionário, não pelo nome. O escopo é enxuto de propósito: só o que o pedido original precisava, com leitura visual limpa.",
-    tags: ["Financeiro", "Power BI", "Dados fictícios"],
-    url: "https://app.powerbi.com/view?r=eyJrIjoiMDFhMGM4ZDUtZDA5YS00ZDFlLWJmY2QtMmYyNThkMzUzZDUyIiwidCI6IjUxZTJmMDUzLWJiMmUtNGJkNi05ZWJmLTdmMjdjOTRjMWZkZCJ9"
+    id: "painel",
+    year: 2026,
+    title: "Painel de operações de agência",
+    text: "Painel interativo que reúne, numa única tela, o que quem coordena uma agência precisa acompanhar: andamento dos projetos, alocação de horas da equipe e fluxo de compras e faturamento. Tem quatro telas (visão geral, projetos, timesheet e financeiro), filtros por período, mês e colaborador, busca e um ícone de explicação em cada indicador. Feito em HTML, CSS e JavaScript puros, com os gráficos desenhados em SVG.",
+    tags: ["HTML", "CSS", "JavaScript", "SVG", "Dados fictícios"],
+    tall: true,
+    url: "painel-operacoes.html"
   },
   {
     id: "geo",
+    year: 2026,
     title: "Dashboard geoespacial de performance por região",
     text: "Dashboard em Leaflet para analisar a performance de entregas por região: mapa por praça, ranking, filtros por métrica, região e mês, e uma tabela de divergências entre dois sistemas de registro, com a regra de conciliação explicada na tela. O trabalho real envolveu dezenas de milhares de registros de entrega, com metodologia própria para tratar divergências entre fontes. Esta demonstração usa números gerados.",
     tags: ["Leaflet", "Geocodificação", "Ranking por área", "Dados fictícios"],
@@ -449,12 +553,42 @@ const PROJECTS = [
     url: "dashboard-geoespacial.html"
   },
   {
-    id: "painel",
-    title: "Painel de operações de agência",
-    text: "Painel interativo que reúne, numa única tela, o que quem coordena uma agência precisa acompanhar: andamento dos projetos, alocação de horas da equipe e fluxo de compras e faturamento. Tem quatro telas (visão geral, projetos, timesheet e financeiro), filtros por período, mês e colaborador, busca e um ícone de explicação em cada indicador. Feito em HTML, CSS e JavaScript puros, com os gráficos desenhados em SVG.",
-    tags: ["HTML", "CSS", "JavaScript", "SVG", "Dados fictícios"],
+    id: "financeiro",
+    year: 2025,
+    title: "Pagamentos semanais de entregadores",
+    text: "Visão dos pagamentos por semana, com a variação entre semanas e busca pelo código do funcionário, não pelo nome. O escopo é enxuto de propósito: só o que o pedido original precisava, com leitura visual limpa.",
+    tags: ["Financeiro", "Power BI", "Dados fictícios"],
+    url: "https://app.powerbi.com/view?r=eyJrIjoiMDFhMGM4ZDUtZDA5YS00ZDFlLWJmY2QtMmYyNThkMzUzZDUyIiwidCI6IjUxZTJmMDUzLWJiMmUtNGJkNi05ZWJmLTdmMjdjOTRjMWZkZCJ9"
+  },
+  {
+    id: "educacao",
+    year: 2025,
+    title: "Monitoramento em programas socioemocionais",
+    text: "Dashboard para acompanhar adesão, engajamento e satisfação dos alunos em diferentes programas de desenvolvimento emocional. Reúne frequência média, taxa de alunos ativos, participação familiar e avaliação por tipo de programa, para apoiar as decisões da equipe escolar.",
+    tags: ["Educação", "Power BI", "Dados fictícios"],
+    url: "https://app.powerbi.com/view?r=eyJrIjoiNmExYjYyMjItY2ZlMy00ZTMzLTkxODUtODdkYWU1NjFiNjk0IiwidCI6IjUxZTJmMDUzLWJiMmUtNGJkNi05ZWJmLTdmMjdjOTRjMWZkZCJ9"
+  }
+];
+
+/* Sites (do mais novo para o mais antigo) */
+const SITES = [
+  {
+    id: "reserva",
+    year: 2026,
+    title: "Reserva de quartos para evento corporativo",
+    text: "Site para os participantes de uma convenção anual escolherem o quarto e o companheiro de hospedagem: criação de conta, quartos separados por bloco, vagas que atualizam sozinhas, convite por mensagem, resumo da reserva com contagem regressiva e histórico de registros. A versão real tem back-end, com login, painel administrativo e controle de reservas simultâneas. Aqui está só a parte visual, com dados fictícios, e nada é salvo.",
+    tags: ["HTML", "CSS", "JavaScript", "Dados fictícios"],
     tall: true,
-    url: "painel-operacoes.html"
+    url: "reserva-quartos.html"
+  },
+  {
+    id: "crud",
+    year: 2024,
+    title: "CRUD do zero",
+    text: "Meu primeiro site feito do zero, sem ajuda de IA, só com testes e pesquisa: telas de login e de cadastro de uma plataforma. Nunca foi concluído com a integração a um banco de dados, e continua aqui como registro de onde eu comecei.",
+    tags: ["Front-end", "Feito sem IA"],
+    short: true,
+    url: "https://luise-udala.github.io/CRUD-do-zero/"
   }
 ];
 
@@ -545,41 +679,58 @@ function visual(p){
   return mock(p.id);
 }
 
-/* ---------- monta a seção de projetos ---------- */
-const list = document.getElementById("projList");
-const stage = document.getElementById("stage");
-PROJECTS.forEach((p, i) => {
-  const art = document.createElement("article");
-  art.className = "proj" + (i === 0 ? " is-active" : "");
-  art.dataset.index = i;
-  art.innerHTML = `
-    <h3>${p.title}</h3>
-    <p>${p.text}</p>
-    <ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join("")}</ul>
-    ${p.url ? `<div class="proj-actions"><a class="btn btn-outline btn-sm" href="${p.url}" target="_blank" rel="noopener">Abrir em tela cheia</a></div>` : ""}
-    <div class="inline-visual">${visual(p)}</div>`;
-  if (p.url) art.querySelector(".inline-visual").classList.add("is-embed", ...(p.tall ? ["is-tall"] : []));
-  list.appendChild(art);
+/* ---------- monta as seções de projetos e de sites ---------- */
+function montarLista(itens, container){
+  itens.forEach(p => {
+    const art = document.createElement("article");
+    art.className = "proj";
+    const tamanho = p.tall ? "is-tall" : (p.short ? "is-short" : "is-wide");
+    const frameClass = "frame " + (p.url ? tamanho : "is-mock");
+    art.innerHTML = `
+      <div class="proj-info">
+        <div>
+          ${p.year ? `<span class="proj-year">${p.year}</span>` : ""}
+          <h3>${p.title}</h3>
+          <p>${p.text}</p>
+        </div>
+        <div class="proj-side">
+          <ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join("")}</ul>
+          ${p.url ? `<div class="proj-actions"><a class="btn btn-outline btn-sm" href="${p.url}" target="_blank" rel="noopener">Abrir em tela cheia</a></div>` : ""}
+        </div>
+      </div>
+      <div class="${frameClass}">
+        ${visual(p)}
+        ${p.url ? `<button type="button" class="frame-lock" aria-label="Ativar a interação com ${p.title}"><span>Clique para interagir</span></button>` : ""}
+      </div>`;
+    const frame = art.querySelector(".frame");
+    frame.addEventListener("mouseleave", () => frame.classList.remove("is-active"));
+    container.appendChild(art);
+  });
+}
+montarLista(PROJECTS, document.getElementById("projList"));
+montarLista(SITES, document.getElementById("sitesList"));
 
-  const panel = document.createElement("div");
-  panel.className = "panel" + (i === 0 ? " is-active" : "");
-  panel.dataset.index = i;
-  panel.innerHTML = visual(p);
-  stage.appendChild(panel);
+/* o painel só captura a rolagem depois de um clique; sair dele devolve a rolagem à página */
+document.addEventListener("click", e => {
+  const lock = e.target.closest(".frame-lock");
+  document.querySelectorAll(".frame.is-active").forEach(f => { if (!lock || f !== lock.parentElement) f.classList.remove("is-active"); });
+  if (lock) lock.parentElement.classList.add("is-active");
 });
 
-const items = [...list.querySelectorAll(".proj")];
-const panels = [...stage.querySelectorAll(".panel")];
-function setActive(i){
-  items.forEach((el, k) => el.classList.toggle("is-active", k === i));
-  panels.forEach((el, k) => el.classList.toggle("is-active", k === i));
-}
-if ("IntersectionObserver" in window){
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) setActive(Number(e.target.dataset.index)); });
-  }, { rootMargin: "-45% 0px -45% 0px" });
-  items.forEach(el => io.observe(el));
-}
+/* o número no subtítulo acompanha a quantidade de cartões */
+(function(){
+  const nomes = ["", "Uma", "Duas", "Três", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove", "Dez"];
+  const n = document.querySelectorAll(".qcard").length;
+  const alvo = document.getElementById("qtdPerguntas");
+  if (alvo && nomes[n]) alvo.textContent = nomes[n];
+})();
+
+/* cartões de perguntas: no celular, o toque vira o cartão */
+document.querySelectorAll(".qcard").forEach(c => {
+  c.addEventListener("click", () => {
+    if (window.matchMedia("(hover: none)").matches) c.classList.toggle("is-flipped");
+  });
+});
 
 /* abas da prévia do painel */
 document.addEventListener("click", e => {
