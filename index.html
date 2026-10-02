@@ -6,13 +6,13 @@
 <title>Luise Udala | Analista de BI</title>
 <meta name="description" content="Todo número conta uma história. Portfólio de Luise Udala, analista de BI: dashboards, análise de dados, integração de sistemas e qualidade de dados.">
 <meta property="og:title" content="Luise Udala | Analista de BI">
-<meta property="og:description" content="O que os dados têm a dizer? Portfólio de BI e análise de dados.">
+<meta property="og:description" content="Como posso te ajudar a tirar a sua planilha do caos? Portfólio de BI e análise de dados.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#FFF4E3">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#785D56;
@@ -73,14 +73,16 @@ h3{font-size:clamp(1.3rem,2.2vw,1.7rem);letter-spacing:-0.015em}
 .top{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(255,244,227,.86);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid rgba(74,54,49,.14)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
 .brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem;letter-spacing:-0.01em;text-decoration:none;color:var(--text)}
+.brand span{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-style:italic;font-weight:400;font-size:1.7rem;line-height:1;letter-spacing:0}
 .top nav{display:flex;align-items:center;gap:clamp(14px,3vw,34px)}
 .top nav a:not(.btn){color:var(--muted);text-decoration:none;font-weight:500;font-size:.98rem;transition:color .2s}
 .top nav a:not(.btn):hover{color:var(--text)}
 
 /* hero */
+.hero h1{font-size:clamp(2rem,4.3vw,3.5rem);line-height:1.08;letter-spacing:-0.03em;text-wrap:pretty}
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:120px 0 72px;background-color:var(--white);color:var(--text);overflow:hidden;
   background-image:linear-gradient(rgba(120,93,86,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(120,93,86,.09) 1px,transparent 1px);background-size:56px 56px}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,5vw,72px);align-items:center}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center}
 .hero-copy .lead{margin-top:26px;color:var(--muted)}
 .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
 .chart-wrap{position:relative}
@@ -211,7 +213,7 @@ h3{font-size:clamp(1.3rem,2.2vw,1.7rem);letter-spacing:-0.015em}
 footer{background:var(--ink);color:var(--on-dark-muted);padding:28px 0 36px;border-top:1px solid rgba(255,255,255,.1);font-size:.92rem}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
-.signature{display:block;width:150px;height:auto;margin-top:28px}
+.signature{display:block;width:100px;height:auto;margin-top:24px}
 .contact-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(24px,5vw,72px);align-items:center}
 .contact-mark{width:100%;max-width:400px;height:auto;justify-self:end}
 
@@ -264,6 +266,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (max-width:639px){
   .qgrid{grid-template-columns:1fr}
 }
+@media (max-width:380px){
+  .brand span{font-size:1.4rem}
+  .top nav .btn{padding:8px 14px}
+}
+@media (max-width:340px){
+  .brand img{width:34px;height:auto}
+  .brand span{font-size:1.25rem}
+  .top .wrap{padding-inline:14px}
+}
 @media (max-width:640px){
   .frame.is-wide{aspect-ratio:4/3}
   .frame.is-tall{height:560px}
@@ -303,7 +314,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <section class="hero" id="topo">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <h1>O que os dados têm a dizer?</h1>
+        <h1>Como posso te ajudar a tirar a sua planilha do caos?</h1>
         <p class="lead">Todo número conta uma história. Eu sou a Luise, analista de BI, e meu trabalho é escutar essas histórias com calma para transformá-las em clareza, direção e sentido para cada tipo de negócio.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#projetos">Ver projetos</a>
@@ -419,7 +430,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="tools-copy">
         <h2 id="ferramentas-titulo">Ferramentas e jeito de trabalhar</h2>
         <p class="lead">Gosto de entender a operação de perto, identificar o gargalo e levar a solução até a implementação, com documentação para o time conseguir usar.</p>
-        <img class="signature" src="assinatura.png" alt="Assinatura de Luise" width="150" height="140">
+        <img class="signature" src="assinatura.png" alt="Assinatura de Luise" width="100" height="94">
       </div>
       <div class="toollist">
         <dl>
@@ -508,7 +519,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <h2 id="contato-titulo">Vamos conversar sobre os seus dados?</h2>
       <p class="lead">Se você tem uma pergunta de negócio, uma planilha cheia de controles ou um dashboard que ninguém entende, me chama.</p>
       <div class="contact-links">
-        <a class="btn btn-primary" href="mailto:luise_u.silva@hotmail.com">Enviar e-mail</a>
+        <a class="btn btn-primary" href="mailto:luiseudala.pro@gmail.com">Enviar e-mail</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/luiseudala/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn btn-ghost" href="https://www.instagram.com/luiseudala/" target="_blank" rel="noopener">Instagram</a>
       </div>
