@@ -1,0 +1,61 @@
+/* app.css — adicionado em 2026, com ajuda de IA, só para a demonstração funcionar.
+   O visual da tela de login (style.css) continua sendo o projeto original de 2024. */
+
+[hidden]{display:none !important}
+
+body{height:auto;min-height:100vh;padding:1.5rem 0}
+
+.msg{
+    min-height:1.5rem;
+    margin-top:.25rem;
+    text-align:center;
+    font-weight:500;
+    font-size:1rem;
+    color:rgb(53,53,53);
+}
+.msg.ok{color:#1e7b34}
+.msg.erro{color:#c0262d}
+
+.nota{
+    margin-top:1rem;
+    text-align:center;
+    font-size:.8rem;
+    line-height:1.4;
+    color:rgb(53,53,53);
+    opacity:.9;
+}
+
+.perfil{
+    margin:1.25rem 0 .5rem;
+    padding:.25rem 1rem;
+    border:0.125rem solid rgba(255,255,255,.2);
+    border-radius:0.625rem;
+}
+.perfil div{
+    display:flex;
+    justify-content:space-between;
+    gap:1rem;
+    padding:.7rem 0;
+    border-bottom:1px solid rgba(53,53,53,.15);
+}
+.perfil div:last-child{border-bottom:none}
+.perfil dt{font-size:.85rem;color:rgba(53,53,53,.8);font-weight:500}
+.perfil dd{margin:0;text-align:right;font-weight:500;color:rgb(53,53,53);word-break:break-word}
+
+.painel .box{margin:1rem 0}
+
+.acoes{display:flex;gap:.75rem;margin-top:1rem}
+.sec{
+    flex:1;
+    height:3.125rem;
+    background:transparent;
+    border:0.125rem solid #2b2b2bc0;
+    border-radius:0.625rem;
+    color:rgb(53,53,53);
+    font-weight:500;
+    font-size:.875rem;
+    cursor:pointer;
+}
+.sec:hover{background:rgba(255,255,255,.25)}
+.sec.perigo{color:#a11d24;border-color:rgba(161,29,36,.6)}
+.sec.perigo:hover{background:rgba(161,29,36,.12)}
