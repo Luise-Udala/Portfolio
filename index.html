@@ -229,10 +229,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .65s cubic-bezier(.2,.7,.2,1);border:1px solid rgba(74,54,49,.14)}
 .qfront{background:var(--tom);color:var(--texto);transform:rotateY(0deg)}
 .qback{background:var(--tom2);color:var(--texto2);transform:rotateY(180deg);justify-content:center}
-.qimg{position:absolute;inset:0;z-index:0;opacity:var(--op,.55);mix-blend-mode:luminosity;
-  background:var(--img, radial-gradient(circle at 86% 14%, rgba(255,244,227,.85) 0 20%, transparent 21%), radial-gradient(circle at 8% 96%, rgba(74,54,49,.45) 0 34%, transparent 35%));
-  background-size:cover;background-position:center}
-.qfront::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,var(--tom) 0%,color-mix(in srgb,var(--tom) 55%,transparent) 32%,color-mix(in srgb,var(--tom) 0%,transparent) 66%)}
+.qimg{position:absolute;left:0;right:0;bottom:0;height:76%;z-index:0;opacity:var(--op,.65);mix-blend-mode:luminosity;background:var(--img, radial-gradient(circle at 86% 14%, rgba(255,244,227,.85) 0 20%, transparent 21%), radial-gradient(circle at 8% 96%, rgba(74,54,49,.45) 0 34%, transparent 35%));background-size:cover;background-position:center 22%;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 40%);mask-image:linear-gradient(to bottom,transparent 0,#000 40%)}
 .qfront h3{position:relative;z-index:1;font-size:clamp(1.25rem,2.1vw,1.75rem);line-height:1.12;letter-spacing:-0.02em;font-weight:700;text-wrap:balance}
 .qdica{position:relative;z-index:1;margin-top:auto;align-self:flex-start;font-size:.82rem;font-weight:600;padding:5px 12px;border-radius:999px;border:1.5px solid currentColor;opacity:.85}
 .so-toque{display:none}
@@ -353,7 +350,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <p><span id="qtdPerguntas">Seis</span> perguntas para conhecer o meu trabalho.</p>
       </div>
       <div class="qgrid">
-        <article class="qcard" tabindex="0" style="--tom:#785D56;--texto:#FFF4E3;--tom2:#FFF4E3;--texto2:#4A3631;--img:url(quad-1.jpg?v=3);--op:0.52">
+        <article class="qcard" tabindex="0" style="--tom:#785D56;--texto:#FFF4E3;--tom2:#FFF4E3;--texto2:#4A3631;--img:url(quad-1.jpg?v=4);--op:0.72">
           <div class="qface qfront">
             <div class="qimg"></div>
             <h3>Chegou um pedido de dashboard. E agora?</h3>
@@ -361,7 +358,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           </div>
           <div class="qface qback"><p>Antes do primeiro gráfico, entendo o objetivo: qual decisão o dashboard vai apoiar e quem vai usá-lo. Depois levanto os indicadores e os dados disponíveis, alinho com quem pediu e só então começo a construir.</p></div>
         </article>
-        <article class="qcard" tabindex="0" style="--tom:#C6B299;--texto:#4A3631;--tom2:#785D56;--texto2:#FFF4E3;--img:url(quad-2.jpg?v=3);--op:0.48">
+        <article class="qcard" tabindex="0" style="--tom:#C6B299;--texto:#4A3631;--tom2:#785D56;--texto2:#FFF4E3;--img:url(quad-2.jpg?v=4);--op:0.62">
           <div class="qface qfront">
             <div class="qimg"></div>
             <h3>Como saber se o número está certo?</h3>
@@ -369,7 +366,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           </div>
           <div class="qface qback"><p>Do jeito chato e necessário: comparo com a origem, linha por linha. Gráfico lindo com número errado só erra com mais estilo, e isso eu não deixo passar.</p></div>
         </article>
-        <article class="qcard" tabindex="0" style="--tom:#BE4C54;--texto:#FFFAF2;--tom2:#E6D5C1;--texto2:#4A3631;--img:url(quad-3.jpg?v=3);--op:0.36">
+        <article class="qcard" tabindex="0" style="--tom:#BE4C54;--texto:#FFFAF2;--tom2:#E6D5C1;--texto2:#4A3631;--img:url(quad-3.jpg?v=4);--op:0.55">
           <div class="qface qfront">
             <div class="qimg"></div>
             <h3>E quando o dado simplesmente não bate?</h3>
@@ -377,7 +374,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           </div>
           <div class="qface qback"><p>Registro o erro com evidência, aviso quem pode corrigir e acompanho até resolver. Sem drama: print, paciência e tudo documentado.</p></div>
         </article>
-        <article class="qcard" tabindex="0" style="--tom:#E6D5C1;--texto:#4A3631;--tom2:#BE4C54;--texto2:#FFFAF2;--img:url(quad-4.jpg?v=3);--op:0.46">
+        <article class="qcard" tabindex="0" style="--tom:#E6D5C1;--texto:#4A3631;--tom2:#BE4C54;--texto2:#FFFAF2;--img:url(quad-4.jpg?v=4);--op:0.62">
           <div class="qface qfront">
             <div class="qimg"></div>
             <h3>Por que dashboard precisa de personalidade?</h3>
@@ -385,7 +382,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           </div>
           <div class="qface qback"><p>Número certo é a base, sempre. Mas um dashboard bonito, com cor, ritmo e boa organização, convida a pessoa a abrir, entender mais rápido e decidir com mais segurança.</p></div>
         </article>
-        <article class="qcard" tabindex="0" style="--tom:#4A3631;--texto:#FFF4E3;--tom2:#C6B299;--texto2:#4A3631;--img:url(quad-5.jpg?v=3);--op:0.52">
+        <article class="qcard" tabindex="0" style="--tom:#4A3631;--texto:#FFF4E3;--tom2:#C6B299;--texto2:#4A3631;--img:url(quad-5.jpg?v=4);--op:0.9">
           <div class="qface qfront">
             <div class="qimg"></div>
             <h3>Power BI, HTML, CSS, JavaScript… por que tudo isso?</h3>
@@ -393,7 +390,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           </div>
           <div class="qface qback"><p>Comecei no Power BI, que me ensinou a pensar em dados. Depois bateu a curiosidade: e se eu desenhasse a visualização do jeito que a história pede? Hoje uso os dois, e nenhum ficou com ciúmes.</p></div>
         </article>
-        <article class="qcard" tabindex="0" style="--tom:#FFFAF2;--texto:#4A3631;--tom2:#785D56;--texto2:#FFF4E3;--img:url(quad-6.jpg?v=3);--op:0.4">
+        <article class="qcard" tabindex="0" style="--tom:#FFFAF2;--texto:#4A3631;--tom2:#785D56;--texto2:#FFF4E3;--img:url(quad-6.jpg?v=4);--op:0.6">
           <div class="qface qfront">
             <div class="qimg"></div>
             <h3>E a inteligência artificial, entra onde?</h3>
