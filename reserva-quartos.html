@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reserva de quartos · Demonstração</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --tinta:#16211B; --musgo:#55665A; --suave:#8A9790;
+    --azul:#0A3FA8; --azul-esc:#082F7D;
+    --ocre:#A8743C;
+    --papel:rgba(255,255,255,.74);
+    --papel-solido:rgba(255,255,255,.92);
+    --borda:rgba(22,33,27,.10);
+    --vidro:rgba(252,251,246,.55);
+    --raio:14px;
+    --sombra:0 1px 2px rgba(22,33,27,.04), 0 8px 24px rgba(22,33,27,.06);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+
+  /* fundo: degradê suave nos tons do próprio site */
+  body::before{
+    content:'';position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(900px 500px at 12% -10%, rgba(85,102,90,.20), transparent 60%),
+      radial-gradient(800px 480px at 100% 20%, rgba(168,116,60,.14), transparent 60%),
+      linear-gradient(180deg,#f3f1e8 0%,#f7f6f0 55%,#f1efe5 100%);
+  }
+
+  body{
+    color:var(--tinta);
+    font-family:'Barlow',system-ui,-apple-system,sans-serif;
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  .barra{
+    position:sticky;top:0;z-index:20;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    padding:.95rem 1.25rem;
+    background:var(--vidro);
+    backdrop-filter:blur(22px) saturate(160%);
+    -webkit-backdrop-filter:blur(22px) saturate(160%);
+    border-bottom:1px solid rgba(255,255,255,.65);
+    box-shadow:0 1px 20px rgba(22,33,27,.05);
+  }
+  .barra .logo{display:inline-flex;align-items:center;gap:.55rem;color:var(--tinta);
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:1.2rem;letter-spacing:.16em;text-transform:uppercase}
+  .barra .ctx{font-size:.78rem;letter-spacing:.03em;color:var(--musgo)}
+
+  .nota-demo{max-width:34rem;margin:.9rem auto 0;padding:0 1.25rem}
+  .nota-demo p{margin:0;padding:.6rem .9rem;border-radius:10px;background:rgba(168,116,60,.10);
+    border:1px solid rgba(168,116,60,.25);color:#6f4a22;font-size:.85rem;line-height:1.45;max-width:none}
+
+  .faixa{padding:1.6rem 1.25rem 1rem;max-width:34rem;margin:0 auto}
+  .faixa h1{
+    font-weight:600;font-size:clamp(1.6rem,6vw,2.1rem);line-height:1.15;
+    letter-spacing:-.015em;margin:0 0 .45rem;color:var(--tinta);
+  }
+  .faixa p{margin:0;color:var(--musgo);font-size:.98rem;max-width:36ch}
+
+  h2{
+    font-weight:600;font-size:.82rem;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--suave);margin:2.1rem 0 .75rem;
+  }
+  p{margin:0 0 .9rem;max-width:62ch}
+  .sub{color:var(--musgo)}
+
+  label{display:block;font-weight:500;margin:0 0 .35rem;font-size:.9rem;color:var(--musgo)}
+  input,select{
+    width:100%;padding:.8rem .9rem;font:inherit;color:var(--tinta);
+    background:var(--papel-solido);border:1px solid var(--borda);border-radius:10px;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  input:focus,select:focus{
+    outline:none;border-color:var(--azul);
+    box-shadow:0 0 0 3px rgba(10,63,168,.14);
+  }
+  button:focus-visible{outline:2px solid var(--azul);outline-offset:2px}
+  .campo{margin-bottom:1.05rem}
+  .dica{font-size:.83rem;color:var(--suave);margin:.4rem 0 0}
+
+  .consent{
+    display:flex;gap:.7rem;align-items:flex-start;
+    background:var(--papel);border:1px solid var(--borda);border-radius:var(--raio);
+    padding:.95rem;margin-bottom:1.2rem;backdrop-filter:blur(8px);
+  }
+  .consent input{margin-top:.3rem;flex:none;width:auto;accent-color:var(--azul)}
+  .consent span{font-size:.86rem;color:var(--musgo);line-height:1.5}
+
+  button{
+    font:inherit;font-weight:600;font-size:.94rem;cursor:pointer;
+    border-radius:10px;border:1px solid transparent;padding:.78rem 1.2rem;
+    transition:background .15s, border-color .15s, transform .06s;
+  }
+  button:active{transform:translateY(1px)}
+  .principal{background:var(--azul);color:#fff;width:100%}
+  .principal:hover{background:var(--azul-esc)}
+  .principal[disabled]{opacity:.4;cursor:not-allowed}
+  .secundario{background:var(--papel-solido);border-color:var(--borda);color:var(--tinta)}
+  .secundario:hover{border-color:var(--suave)}
+  .texto{background:none;border:none;color:var(--azul);padding:.4rem 0;width:auto;font-weight:500}
+  .texto:hover{text-decoration:underline}
+
+  .oculto{display:none !important}
+  .recado{
+    position:fixed;left:50%;transform:translateX(-50%);bottom:1.1rem;max-width:32rem;
+    width:calc(100% - 2rem);background:rgba(22,33,27,.94);color:#fff;
+    padding:.85rem 1.05rem;border-radius:12px;font-size:.9rem;z-index:40;
+    backdrop-filter:blur(10px);box-shadow:0 10px 32px rgba(22,33,27,.22);
+  }
+  .recado.erro{background:rgba(140,47,38,.95)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+  .envelope{max-width:34rem;margin:0 auto;padding:.5rem 1.25rem 5rem}
+
+  .abas{display:flex;gap:.3rem;margin-bottom:1.5rem;
+        background:var(--papel);border:1px solid var(--borda);
+        border-radius:12px;padding:.28rem}
+  .abas button{flex:1;background:none;border:none;color:var(--musgo);
+               border-radius:9px;padding:.6rem;font-size:.9rem}
+  .abas button.ativa{background:#fff;color:var(--tinta);box-shadow:var(--sombra)}
+
+  .cracha{
+    display:flex;justify-content:space-between;align-items:center;gap:.8rem;
+    background:var(--papel);border:1px solid var(--borda);border-radius:var(--raio);
+    padding:.8rem 1rem;margin-bottom:1.6rem;font-size:.9rem;backdrop-filter:blur(8px);
+  }
+  .cracha b{display:block;font-weight:600}
+  .cracha code{font-family:'Oswald',sans-serif;letter-spacing:.07em;
+               color:var(--suave);font-size:.78rem}
+
+  .quarto{
+    display:flex;align-items:stretch;
+    background:var(--papel-solido);border:1px solid var(--borda);
+    border-radius:var(--raio);margin-bottom:.7rem;overflow:hidden;
+    box-shadow:var(--sombra);transition:border-color .15s, transform .12s;
+  }
+  .quarto:hover{transform:translateY(-1px);border-color:rgba(22,33,27,.18)}
+  .placa{
+    flex:none;width:5.2rem;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:.15rem;
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:1.7rem;line-height:1;
+    border-right:1px solid var(--borda);
+  }
+  .placa small{font-family:'Barlow',sans-serif;font-size:.62rem;font-weight:500;
+               letter-spacing:.09em;text-transform:uppercase;color:var(--suave)}
+  .corpo{flex:1;padding:.85rem 1rem;min-width:0}
+  .estado{font-size:.87rem;color:var(--musgo);margin-bottom:.6rem}
+  .estado strong{color:var(--tinta);font-weight:600}
+  .acoes{display:flex;gap:.45rem;flex-wrap:wrap}
+  .acoes button{padding:.45rem .9rem;font-size:.85rem;width:auto}
+
+  .quarto.livre .placa{background:rgba(10,63,168,.05);color:var(--azul)}
+  .quarto.aberto .placa{background:rgba(168,116,60,.07);color:var(--ocre)}
+
+  .minha{
+    background:rgba(22,33,27,.95);color:#fff;border-radius:var(--raio);
+    padding:1.3rem;margin-bottom:1.8rem;box-shadow:0 12px 34px rgba(22,33,27,.18);
+  }
+  .minha h2{color:rgba(255,255,255,.62);margin:0 0 .35rem}
+  .minha .numero{font-family:'Oswald',sans-serif;font-weight:600;
+                 font-size:2.9rem;line-height:1;letter-spacing:.01em}
+  .minha p{color:rgba(255,255,255,.76);margin:.5rem 0 1rem;font-size:.92rem}
+  .minha .secundario{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28);color:#fff}
+  .minha .secundario:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.45)}
+  .minha .texto{color:rgba(255,255,255,.72)}
+
+  .aviso{
+    background:var(--papel-solido);border:1px solid var(--borda);
+    border-left:3px solid var(--ocre);border-radius:var(--raio);
+    padding:1.1rem;margin-bottom:1.1rem;box-shadow:var(--sombra);
+  }
+  .aviso strong{display:block;margin-bottom:.35rem;font-weight:600}
+  .aviso p{color:var(--musgo);font-size:.92rem;margin:0 0 .9rem}
+
+  textarea{
+    width:100%;min-height:8rem;font:inherit;font-size:.9rem;padding:.9rem;
+    border:1px solid var(--borda);border-radius:var(--raio);resize:vertical;
+    background:var(--papel-solido);color:var(--tinta);line-height:1.6;
+  }
+  textarea:focus{outline:none;border-color:var(--azul);
+                 box-shadow:0 0 0 3px rgba(10,63,168,.14)}
+
+  .historico{background:var(--papel-solido);border:1px solid var(--borda);
+             border-radius:var(--raio);padding:.2rem 1.1rem;box-shadow:var(--sombra)}
+  .historico div{padding:.75rem 0;border-bottom:1px solid var(--borda);font-size:.91rem}
+  .historico div:last-child{border-bottom:none}
+  .historico small{color:var(--suave);display:block;font-size:.78rem;margin-top:.1rem}
+
+  .ola{font-weight:600;font-size:1.5rem;letter-spacing:-.015em;margin:0 0 1.2rem}
+  .resumo-cartao{
+    background:var(--papel-solido);border:1px solid var(--borda);
+    border-radius:var(--raio);box-shadow:var(--sombra);
+    padding:.3rem 1.2rem;margin-bottom:1.2rem;
+  }
+  .item{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+        padding:.95rem 0;border-bottom:1px solid var(--borda)}
+  .item:last-child{border-bottom:none}
+  .item dt{color:var(--suave);font-size:.82rem;letter-spacing:.06em;
+           text-transform:uppercase;font-weight:600;flex:none}
+  .item dd{margin:0;text-align:right;font-weight:500}
+  .item dd.grande{font-family:'Oswald',sans-serif;font-weight:600;font-size:1.6rem;
+                  line-height:1;letter-spacing:.02em}
+  .item dd.fraco{color:var(--suave);font-weight:400;font-style:italic}
+  .contagem{color:var(--azul);font-weight:600}
+
+  .perigo{background:var(--papel-solido);border-color:rgba(140,47,38,.35);color:#8C2F26}
+  .perigo:hover{background:#8C2F26;color:#fff;border-color:#8C2F26}
+
+  .modal{position:fixed;inset:0;z-index:60;display:flex;align-items:center;
+         justify-content:center;padding:1.25rem;
+         background:rgba(22,33,27,.42);backdrop-filter:blur(4px)}
+  .modal-caixa{background:#fff;border-radius:16px;max-width:24rem;width:100%;
+               padding:1.5rem;box-shadow:0 20px 60px rgba(22,33,27,.28)}
+  .modal-caixa h3{margin:0 0 .6rem;font-size:1.15rem;font-weight:600}
+  .modal-caixa p{margin:0 0 1.4rem;color:var(--musgo);font-size:.94rem}
+  .modal-acoes{display:flex;gap:.55rem}
+  .modal-acoes button{flex:1;width:auto}
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <span class="logo" aria-label="Vértice">
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 4h5.2L12 14.2 16.3 4h5.2L14.6 20h-5.2z" fill="currentColor"/></svg>
+    Vértice
+  </span>
+  <span class="ctx" id="barraEvento"></span>
+</header>
+
+<div class="nota-demo">
+  <p><strong>Versão de demonstração.</strong> Os dados são fictícios e nada é salvo: ao recarregar a página, tudo volta ao início. Para testar, crie uma conta com qualquer e-mail.</p>
+</div>
+
+<div class="faixa">
+  <h1 id="tituloFaixa">Escolha seu quarto</h1>
+  <p id="chamada">Crie sua conta para reservar. O mesmo login serve depois para conferir ou trocar a reserva.</p>
+</div>
+
+<div class="envelope">
+
+  <section id="telaEntrada">
+    <div id="avisoFechado" class="aviso oculto">
+      <strong>Inscrições ainda fechadas</strong>
+      <p style="margin:0">Você já pode criar sua conta e voltar quando a organização liberar.</p>
+    </div>
+
+    <div class="abas">
+      <button id="abaCriar" class="ativa">Criar conta</button>
+      <button id="abaEntrar">Já tenho conta</button>
+    </div>
+
+    <div id="formCriar">
+      <div class="campo">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" autocomplete="name" placeholder="Como deve aparecer para o hotel">
+      </div>
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" autocomplete="email" placeholder="voce@exemplo.com">
+      </div>
+      <div class="campo">
+        <label for="genero">Bloco de quartos</label>
+        <select id="genero"></select>
+      </div>
+      <div class="campo">
+        <label for="senha">Crie uma senha</label>
+        <input type="password" id="senha" autocomplete="new-password">
+        <p class="dica">Use uma senha só para este evento. Não repita a do seu e-mail ou do banco.</p>
+      </div>
+      <div class="consent">
+        <input type="checkbox" id="consentimento">
+        <span id="textoConsentimento"></span>
+      </div>
+      <button class="principal" id="btnCriar">Criar conta</button>
+    </div>
+
+    <div id="formEntrar" class="oculto">
+      <div class="campo">
+        <label for="emailLogin">E-mail</label>
+        <input type="email" id="emailLogin" autocomplete="email">
+      </div>
+      <div class="campo">
+        <label for="senhaLogin">Senha</label>
+        <input type="password" id="senhaLogin" autocomplete="current-password">
+      </div>
+      <button class="principal" id="btnEntrar">Entrar</button>
+      <p class="dica" style="margin-top:.9rem">Esqueceu a senha? Fale com a organização —
+         eles geram uma temporária para você.</p>
+    </div>
+  </section>
+
+  <section id="telaTrocaSenha" class="oculto">
+    <p class="sub">Você entrou com uma senha temporária. Defina a sua antes de continuar.</p>
+    <div class="campo">
+      <label for="senhaAtual">Senha temporária</label>
+      <input type="password" id="senhaAtual" autocomplete="current-password">
+    </div>
+    <div class="campo">
+      <label for="senhaNova">Nova senha</label>
+      <input type="password" id="senhaNova" autocomplete="new-password">
+    </div>
+    <button class="principal" id="btnTrocar">Salvar senha</button>
+  </section>
+
+  <section id="telaQuartos" class="oculto">
+    <div class="cracha">
+      <div><b id="crachaNome"></b><code id="crachaId"></code></div>
+      <button class="texto" id="btnSair">Sair</button>
+    </div>
+
+    <p class="sub" id="subQuartos"></p>
+
+    <div id="minhaReserva" class="minha oculto"></div>
+    <div id="listaEspera" class="aviso oculto"></div>
+    <div id="grupoAbertos"></div>
+    <div id="grupoLivres"></div>
+
+    <p style="margin-top:1.6rem"><button class="texto" id="btnHistorico">Ver minha reserva</button></p>
+  </section>
+
+  <section id="telaConvite" class="oculto">
+    <p class="sub">Mande para quem você quer como companheiro de quarto. Isso não reserva
+       a vaga — ela continua aberta para qualquer pessoa do bloco.</p>
+    <textarea id="conviteTexto" readonly></textarea>
+    <p style="margin-top:.8rem;display:flex;gap:.5rem">
+      <button class="principal" id="btnCopiar" style="width:auto">Copiar texto</button>
+      <button class="secundario" id="btnVoltarConvite">Voltar</button>
+    </p>
+  </section>
+
+  <section id="telaHistorico" class="oculto">
+    <p class="ola" id="olaNome"></p>
+    <dl class="resumo-cartao" id="resumoReserva"></dl>
+    <div id="acoesResumo"></div>
+
+    <h2>Meus registros</h2>
+    <div class="historico" id="listaHistorico"></div>
+    <p style="margin-top:1.3rem"><button class="secundario" id="btnVoltarHist">Voltar aos quartos</button></p>
+  </section>
+
+  <div id="recado" class="recado oculto"></div>
+</div>
+
+<div id="modal" class="modal oculto">
+  <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <h3 id="modalTitulo">Você tem certeza?</h3>
+    <p id="modalTexto"></p>
+    <div class="modal-acoes">
+      <button class="secundario" id="modalNao">Cancelar</button>
+      <button class="perigo" id="modalSim">Tenho certeza</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   DEMONSTRAÇÃO SEM BACK-END
+   Na versão real, estas chamadas vão para um servidor com login,
+   banco de dados e controle de reservas simultâneas. Aqui, tudo
+   fica na memória do navegador, com dados fictícios, e some ao
+   recarregar a página.
+   ============================================================ */
+var DEMO = (function(){
+  var EVENTO = 'Convenção Anual 2026';
+  var DATA_EVENTO = new Date(2026, 11, 10);
+  var GENEROS = ['Feminino', 'Masculino'];
+  var CONSENTIMENTO = 'Autorizo o uso do meu nome e e-mail apenas para organizar a hospedagem neste evento. (Demonstração: nada é salvo.)';
+
+  var contas = {}, sessoes = {}, historico = {}, contador = 0, quartos = [];
+
+  function quarto(numero, genero, nomes){
+    quartos.push({
+      numero: numero, tipo: 'Duplo', genero: genero, capacidade: 2,
+      ocupantes: nomes.map(function(n, i){ return { id: 'seed-' + numero + '-' + i, nome: n }; })
+    });
+  }
+  quarto('201', 'Feminino', []);
+  quarto('202', 'Feminino', ['Ana Souza']);
+  quarto('203', 'Feminino', ['Beatriz Lima', 'Carla Mendes']);
+  quarto('204', 'Feminino', []);
+  quarto('205', 'Feminino', ['Daniela Rocha']);
+  quarto('206', 'Feminino', []);
+  quarto('207', 'Feminino', ['Fernanda Alves', 'Helena Costa']);
+  quarto('208', 'Feminino', ['Isabela Prado']);
+  quarto('301', 'Masculino', ['Bruno Martins']);
+  quarto('302', 'Masculino', []);
+  quarto('303', 'Masculino', ['Carlos Pereira', 'Diego Santos']);
+  quarto('304', 'Masculino', []);
+  quarto('305', 'Masculino', ['Eduardo Ramos']);
+  quarto('306', 'Masculino', []);
+  quarto('307', 'Masculino', ['Felipe Barros', 'Gustavo Nunes']);
+  quarto('308', 'Masculino', []);
+
+  function registrar(conta, acao, numero){
+    historico[conta.id].push({ acao: acao, quarto: numero || '', quando: new Date().toISOString() });
+  }
+  function contaDe(token){
+    var c = sessoes[token];
+    if (!c) throw new Error('Sessão expirada. Entre novamente.');
+    return c;
+  }
+  function visao(q, conta){
+    var ocupadas = q.ocupantes.length;
+    return {
+      numero: q.numero, tipo: q.tipo, genero: q.genero, capacidade: q.capacidade,
+      ocupadas: ocupadas, vagas: q.capacidade - ocupadas,
+      meu: q.ocupantes.some(function(o){ return o.id === conta.id; }),
+      ocupantes: q.ocupantes.map(function(o){ return o.nome; })
+    };
+  }
+  function quartoDe(conta){
+    return quartos.filter(function(q){
+      return q.ocupantes.some(function(o){ return o.id === conta.id; });
+    })[0] || null;
+  }
+  function estado(conta){
+    var meu = quartoDe(conta);
+    var hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    return {
+      conta: { id: conta.id, nome: conta.nome, email: conta.email, genero: conta.genero },
+      evento: EVENTO,
+      url: window.location.href.split('#')[0],
+      dataFormatada: DATA_EVENTO.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }),
+      diasParaEvento: Math.round((DATA_EVENTO - hoje) / 86400000),
+      mostrarNomes: true,
+      mensagemEspera: 'Todos os quartos do seu bloco estão ocupados. Entre na lista de espera e avisaremos se uma vaga abrir.',
+      quartos: quartos.map(function(q){ return visao(q, conta); }),
+      minhaReserva: meu ? visao(meu, conta) : null
+    };
+  }
+  function abrirSessao(conta){
+    var token = 't' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+    sessoes[token] = conta;
+    return { ok: true, token: token, precisaTrocarSenha: false,
+             conta: { id: conta.id, nome: conta.nome, email: conta.email, genero: conta.genero } };
+  }
+
+  return {
+    estadoPublico: function(){
+      return { evento: EVENTO, textoConsentimento: CONSENTIMENTO, generos: GENEROS, inscricoesAbertas: true };
+    },
+    criarConta: function(email, senha, nome, genero, consentimento){
+      email = String(email || '').trim().toLowerCase();
+      nome = String(nome || '').trim();
+      if (nome.length < 3) return { ok: false, mensagem: 'Informe seu nome completo.' };
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { ok: false, mensagem: 'Informe um e-mail válido.' };
+      if (String(senha || '').length < 6) return { ok: false, mensagem: 'A senha precisa ter pelo menos 6 caracteres.' };
+      if (!consentimento) return { ok: false, mensagem: 'Marque a autorização para criar a conta.' };
+      if (contas[email]) return { ok: false, mensagem: 'Já existe uma conta com esse e-mail. Use a aba "Já tenho conta".' };
+      contador += 1;
+      var conta = { id: 'CV' + String(contador).padStart(3, '0'), nome: nome, email: email, genero: genero, senha: senha };
+      contas[email] = conta;
+      historico[conta.id] = [];
+      registrar(conta, 'conta_criada');
+      return abrirSessao(conta);
+    },
+    entrar: function(email, senha){
+      var conta = contas[String(email || '').trim().toLowerCase()];
+      if (!conta) return { ok: false, mensagem: 'Não encontramos essa conta. Crie uma na aba "Criar conta".' };
+      if (conta.senha !== senha) return { ok: false, mensagem: 'E-mail ou senha incorretos.' };
+      registrar(conta, 'login');
+      return abrirSessao(conta);
+    },
+    trocarSenha: function(token, atual, nova){
+      var conta = contaDe(token);
+      if (conta.senha !== atual) return { ok: false, mensagem: 'A senha temporária não confere.' };
+      if (String(nova || '').length < 6) return { ok: false, mensagem: 'A nova senha precisa ter pelo menos 6 caracteres.' };
+      conta.senha = nova; registrar(conta, 'senha_trocada');
+      return { ok: true, mensagem: 'Senha atualizada.' };
+    },
+    sair: function(token){ delete sessoes[token]; return { ok: true }; },
+    estadoConvidado: function(token){ return estado(contaDe(token)); },
+    reservar: function(token, numero){
+      var conta = contaDe(token);
+      var atual = quartoDe(conta);
+      if (atual) return { ok: false, mensagem: 'Você já está no quarto ' + atual.numero + '. Cancele a reserva antes de trocar.', estado: estado(conta) };
+      var q = quartos.filter(function(x){ return x.numero === numero; })[0];
+      if (!q || q.genero !== conta.genero) return { ok: false, mensagem: 'Esse quarto não pertence ao seu bloco.', estado: estado(conta) };
+      if (q.ocupantes.length >= q.capacidade) return { ok: false, mensagem: 'Esse quarto acabou de ficar sem vagas.', estado: estado(conta) };
+      q.ocupantes.push({ id: conta.id, nome: conta.nome });
+      registrar(conta, 'reserva', q.numero);
+      return { ok: true, mensagem: 'Quarto ' + q.numero + ' reservado.', estado: estado(conta) };
+    },
+    cancelarReserva: function(token){
+      var conta = contaDe(token);
+      var q = quartoDe(conta);
+      if (!q) return { ok: false, mensagem: 'Você não tem reserva para cancelar.', estado: estado(conta) };
+      q.ocupantes = q.ocupantes.filter(function(o){ return o.id !== conta.id; });
+      registrar(conta, 'cancelamento', q.numero);
+      return { ok: true, mensagem: 'Reserva do quarto ' + q.numero + ' cancelada.', estado: estado(conta) };
+    },
+    entrarListaEspera: function(token){
+      var conta = contaDe(token);
+      registrar(conta, 'lista_espera');
+      return { ok: true, mensagem: 'Você entrou na lista de espera. (Demonstração: ninguém será avisado.)' };
+    },
+    meuHistorico: function(token){
+      var conta = contaDe(token);
+      return historico[conta.id].slice().reverse();
+    }
+  };
+})();
+
+var publico = null, estado = null, sessao = null, timerPoll = null;
+
+function el(id){ return document.getElementById(id); }
+function ver(id){ el(id).classList.remove('oculto'); }
+function esconder(id){ el(id).classList.add('oculto'); }
+function soTela(id){
+  ['telaEntrada','telaTrocaSenha','telaQuartos','telaConvite','telaHistorico']
+    .forEach(function(t){ el(t).classList.toggle('oculto', t !== id); });
+}
+function faixa(titulo, texto){
+  el('tituloFaixa').textContent = titulo;
+  el('chamada').textContent = texto;
+}
+function recado(t, erro){
+  var r = el('recado'); r.textContent = t;
+  r.className = 'recado' + (erro ? ' erro' : '');
+  clearTimeout(r._t); r._t = setTimeout(function(){ r.classList.add('oculto'); }, 6000);
+}
+function escapar(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+function travar(v){ document.querySelectorAll('button').forEach(function(b){ b.disabled = v; }); }
+
+/* Porta única: na versão real, esta função fala com o servidor.
+   Na demonstração, ela chama o DEMO acima, com um pequeno atraso. */
+function chamar(nome, args, aoResponder, aoFalhar){
+  setTimeout(function(){
+    var r;
+    try { r = DEMO[nome].apply(null, args || []); }
+    catch(e){
+      if (aoFalhar) aoFalhar();
+      recado(e.message || 'Erro na demonstração.', true);
+      return;
+    }
+    if (aoFalhar) aoFalhar();
+    aoResponder(r);
+  }, 160);
+}
+
+chamar('estadoPublico', [], function(p){
+  publico = p;
+  el('barraEvento').textContent = p.evento;
+  el('textoConsentimento').textContent = p.textoConsentimento;
+  var sel = el('genero');
+  p.generos.forEach(function(g){
+    var o = document.createElement('option'); o.value = g; o.textContent = g; sel.appendChild(o);
+  });
+  if (!p.inscricoesAbertas) ver('avisoFechado');
+});
+
+el('abaCriar').onclick = function(){
+  el('abaCriar').classList.add('ativa'); el('abaEntrar').classList.remove('ativa');
+  ver('formCriar'); esconder('formEntrar');
+};
+el('abaEntrar').onclick = function(){
+  el('abaEntrar').classList.add('ativa'); el('abaCriar').classList.remove('ativa');
+  ver('formEntrar'); esconder('formCriar');
+};
+
+el('btnCriar').onclick = function(){
+  travar(true);
+  chamar('criarConta',
+    [el('email').value, el('senha').value, el('nome').value,
+     el('genero').value, el('consentimento').checked],
+    function(r){
+      if (!r.ok){ recado(r.mensagem, true); return; }
+      sessao = r; entrarNoApp();
+    },
+    function(){ travar(false); });
+};
+
+el('btnEntrar').onclick = function(){
+  travar(true);
+  chamar('entrar', [el('emailLogin').value, el('senhaLogin').value],
+    function(r){
+      if (!r.ok){ recado(r.mensagem, true); return; }
+      sessao = r;
+      if (r.precisaTrocarSenha){
+        faixa('Senha nova', 'Defina sua senha para continuar.');
+        soTela('telaTrocaSenha'); return;
+      }
+      entrarNoApp();
+    },
+    function(){ travar(false); });
+};
+el('senhaLogin').addEventListener('keydown', function(e){ if (e.key === 'Enter') el('btnEntrar').click(); });
+
+el('btnTrocar').onclick = function(){
+  travar(true);
+  chamar('trocarSenha', [sessao.token, el('senhaAtual').value, el('senhaNova').value],
+    function(r){
+      if (!r.ok){ recado(r.mensagem, true); return; }
+      recado(r.mensagem); entrarNoApp();
+    },
+    function(){ travar(false); });
+};
+
+function faixaQuartos(){
+  var primeiro = estado.conta.nome.split(' ')[0];
+  if (estado.minhaReserva){
+    faixa(primeiro + ', seu quarto está reservado',
+          'Quarto ' + estado.minhaReserva.numero + ' · bloco ' + estado.conta.genero + '.');
+  } else {
+    faixa(primeiro + ', escolha seu quarto',
+          'Bloco ' + estado.conta.genero + '. A vaga só é sua depois de confirmar.');
+  }
+}
+
+function entrarNoApp(){
+  el('crachaNome').textContent = sessao.conta.nome;
+  el('crachaId').textContent = sessao.conta.id + ' · ' + sessao.conta.email;
+  faixa(sessao.conta.nome.split(' ')[0] + ', escolha seu quarto',
+        'Bloco ' + sessao.conta.genero + '. A vaga só é sua depois de confirmar.');
+  soTela('telaQuartos');
+  atualizar();
+  clearInterval(timerPoll);
+  timerPoll = setInterval(atualizar, 8000);
+}
+
+el('btnSair').onclick = function(){
+  clearInterval(timerPoll);
+  if (sessao) chamar('sair', [sessao.token], function(){});
+  sessao = null; estado = null;
+  faixa('Escolha seu quarto', 'Entre com sua conta para reservar.');
+  soTela('telaEntrada');
+};
+
+function atualizar(){
+  chamar('estadoConvidado', [sessao.token], function(e){ estado = e; desenhar(); });
+}
+
+function desenhar(){
+  if (!estado) return;
+  var meus = estado.quartos.filter(function(q){ return q.genero === estado.conta.genero; });
+  var abertos = meus.filter(function(q){ return q.ocupadas > 0 && q.vagas > 0 && !q.meu; });
+  var livres  = meus.filter(function(q){ return q.ocupadas === 0; });
+
+  el('subQuartos').textContent = estado.minhaReserva
+    ? 'Para trocar de quarto, cancele a reserva atual primeiro.'
+    : (abertos.length + livres.length) + ' opções disponíveis agora no bloco ' +
+      estado.conta.genero + '.';
+
+  if (!el('telaQuartos').classList.contains('oculto')) faixaQuartos();
+
+  if (estado.minhaReserva){
+    var q = estado.minhaReserva;
+    var outro = (q.ocupantes || []).filter(function(n){ return n !== estado.conta.nome; })[0];
+    el('minhaReserva').innerHTML =
+      '<h2>Seu quarto</h2><div class="numero">' + escapar(q.numero) + '</div>' +
+      '<p>' + (outro ? 'Com ' + escapar(outro) + '.' :
+               'A segunda vaga ainda está aberta — convide alguém.') + '</p>' +
+      '<div class="acoes">' +
+        (q.vagas > 0 ? '<button class="secundario" onclick="abrirConvite(\'' + escapar(q.numero) + '\')">Gerar convite</button>' : '') +
+        '<button class="texto" onclick="cancelar()">Cancelar reserva</button>' +
+      '</div>';
+    ver('minhaReserva');
+  } else esconder('minhaReserva');
+
+  if (!estado.minhaReserva && !meus.length){
+    el('listaEspera').innerHTML =
+      '<strong>Quartos ainda não liberados</strong>' +
+      '<p>A organização ainda está montando o bloco ' + escapar(estado.conta.genero) +
+      '. Volte daqui a pouco — sua conta já está criada.</p>';
+    ver('listaEspera');
+  } else if (!estado.minhaReserva && !abertos.length && !livres.length){
+    el('listaEspera').innerHTML =
+      '<strong>Sem vagas no bloco ' + escapar(estado.conta.genero) + '</strong>' +
+      '<p>' + escapar(estado.mensagemEspera) + '</p>' +
+      '<button class="secundario" onclick="entrarEspera()">Entrar na lista de espera</button>';
+    ver('listaEspera');
+  } else esconder('listaEspera');
+
+  if (estado.minhaReserva){
+    el('grupoAbertos').innerHTML = '';
+    el('grupoLivres').innerHTML = '';
+  } else {
+    el('grupoAbertos').innerHTML = abertos.length
+      ? '<h2>Quartos com uma vaga aberta</h2>' + abertos.map(cartao).join('') : '';
+    el('grupoLivres').innerHTML = livres.length
+      ? '<h2>Quartos totalmente livres</h2>' + livres.map(cartao).join('') : '';
+  }
+}
+
+function cartao(q){
+  var livre = q.ocupadas === 0;
+  var quem = livre ? 'Nenhuma vaga ocupada'
+    : (estado.mostrarNomes && q.ocupantes && q.ocupantes.length
+        ? 'Com <strong>' + escapar(q.ocupantes[0]) + '</strong>'
+        : '<strong>1</strong> vaga já ocupada');
+
+  return '<div class="quarto ' + (livre ? 'livre' : 'aberto') + '">' +
+    '<div class="placa">' + escapar(q.numero) + '<small>' + escapar(q.tipo) + '</small></div>' +
+    '<div class="corpo">' +
+      '<div class="estado">' + quem + ' · ' + q.vagas + ' de ' + q.capacidade + ' livre(s)</div>' +
+      '<div class="acoes">' +
+        '<button class="principal" onclick="reservar(\'' + escapar(q.numero) + '\')">Reservar</button>' +
+        '<button class="secundario" onclick="abrirConvite(\'' + escapar(q.numero) + '\')">Convite</button>' +
+      '</div>' +
+    '</div></div>';
+}
+
+function reservar(numero){
+  travar(true);
+  chamar('reservar', [sessao.token, numero], function(r){
+    if (r.estado){ estado = r.estado; desenhar(); }
+    recado(r.mensagem, !r.ok);
+  }, function(){ travar(false); });
+}
+
+var aoConfirmarAgora = null;
+function confirmar(texto, aoConfirmar){
+  el('modalTexto').textContent = texto;
+  aoConfirmarAgora = aoConfirmar;
+  el('modal').classList.remove('oculto');
+  el('modalNao').focus();
+}
+function fecharModal(){
+  el('modal').classList.add('oculto');
+  aoConfirmarAgora = null;
+}
+el('modalNao').onclick = fecharModal;
+el('modalSim').onclick = function(){
+  var fn = aoConfirmarAgora;
+  fecharModal();
+  if (fn) fn();
+};
+el('modal').onclick = function(e){ if (e.target === el('modal')) fecharModal(); };
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && !el('modal').classList.contains('oculto')) fecharModal();
+});
+
+function cancelar(){
+  confirmar('Seu nome sairá da lista se você não se acomodar em outro quarto.', function(){
+    chamar('cancelarReserva', [sessao.token], function(r){
+      if (r.estado){ estado = r.estado; desenhar(); }
+      recado(r.mensagem, !r.ok);
+      if (r.ok && !el('telaHistorico').classList.contains('oculto')) voltarAosQuartos();
+    });
+  });
+}
+
+function entrarEspera(){
+  chamar('entrarListaEspera', [sessao.token], function(r){ recado(r.mensagem, !r.ok); });
+}
+
+function abrirConvite(numero){
+  faixa('Convite — quarto ' + numero, 'A vaga continua aberta até alguém confirmar.');
+  el('conviteTexto').value =
+    'Oi! Estou no quarto ' + numero + ' da ' + estado.evento + ' (' + estado.conta.nome + ').' +
+    ' Ainda tem vaga comigo — se quiser, escolhe esse quarto aqui: ' + estado.url +
+    '\n\nA vaga não fica reservada, então vale quem confirmar primeiro.';
+  soTela('telaConvite');
+}
+el('btnCopiar').onclick = function(){
+  var t = el('conviteTexto'); t.select(); t.setSelectionRange(0, 99999);
+  var copiou = false;
+  try { copiou = document.execCommand('copy'); } catch(e){}
+  recado(copiou ? 'Texto copiado.' : 'Selecione o texto e copie manualmente.', !copiou);
+};
+el('btnVoltarConvite').onclick = function(){ voltarAosQuartos(); };
+
+var NOMES = {
+  conta_criada:'Conta criada', login:'Entrou no sistema', reserva:'Reservou quarto',
+  cancelamento:'Cancelou reserva', lista_espera:'Entrou na lista de espera',
+  senha_trocada:'Trocou a senha', senha_resetada_pelo_admin:'Senha resetada pela organização',
+  admin_edicao:'Alteração feita pela organização'
+};
+
+function textoContagem(dias){
+  if (dias === null || dias === undefined) return null;
+  if (dias > 1)  return 'Faltam ' + dias + ' dias';
+  if (dias === 1) return 'Falta 1 dia';
+  if (dias === 0) return 'É hoje';
+  return 'O evento já aconteceu';
+}
+
+function linha(rotulo, valor, classe){
+  return '<div class="item"><dt>' + escapar(rotulo) + '</dt>' +
+         '<dd class="' + (classe || '') + '">' + valor + '</dd></div>';
+}
+
+function montarResumo(){
+  el('olaNome').textContent = 'Olá, ' + estado.conta.nome.split(' ')[0] + '!';
+
+  var html = '';
+  html += estado.dataFormatada
+    ? linha('Data do evento', escapar(estado.dataFormatada))
+    : linha('Data do evento', 'Ainda não definida', 'fraco');
+
+  var contagem = textoContagem(estado.diasParaEvento);
+  if (contagem) html += linha('Contagem', '<span class="contagem">' + contagem + '</span>');
+
+  var q = estado.minhaReserva;
+  if (q){
+    html += linha('Seu quarto', escapar(q.numero), 'grande');
+    var outro = (q.ocupantes || []).filter(function(n){ return n !== estado.conta.nome; })[0];
+    html += outro
+      ? linha('Com você', escapar(outro))
+      : linha('Com você', '1 vaga livre', 'fraco');
+    el('acoesResumo').innerHTML =
+      '<button class="perigo" onclick="cancelar()">Cancelar reserva</button>';
+  } else {
+    html += linha('Seu quarto', 'Você ainda não reservou', 'fraco');
+    el('acoesResumo').innerHTML =
+      '<button class="principal" onclick="voltarAosQuartos()">Escolher um quarto</button>';
+  }
+
+  el('resumoReserva').innerHTML = html;
+}
+
+el('btnHistorico').onclick = function(){
+  chamar('meuHistorico', [sessao.token], function(itens){
+    montarResumo();
+    el('listaHistorico').innerHTML = itens.length ? itens.map(function(i){
+      return '<div>' + escapar(NOMES[i.acao] || i.acao) +
+             (i.quarto ? ' — quarto ' + escapar(i.quarto) : '') +
+             '<small>' + escapar(new Date(i.quando).toLocaleString('pt-BR')) + '</small></div>';
+    }).join('') : '<div>Nenhum registro ainda.</div>';
+    faixa('Minha reserva', 'Resumo da sua acomodação no evento.');
+    soTela('telaHistorico');
+  });
+};
+el('btnVoltarHist').onclick = function(){ voltarAosQuartos(); };
+
+function voltarAosQuartos(){
+  soTela('telaQuartos');
+  faixaQuartos();
+}
+</script>
+</body>
+</html>
